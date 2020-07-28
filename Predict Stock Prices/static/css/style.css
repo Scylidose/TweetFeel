@@ -1,3 +1,7 @@
 body{
     background-color: #e6e6e6 !important;
 }
+
+hr {
+    border-top: 4px solid #2c2d75 !important;
+}

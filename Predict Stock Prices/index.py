@@ -7,9 +7,11 @@ from datetime import date
 from flask import (Flask, url_for, render_template,  make_response,
                    redirect, request, g, session, Response, jsonify)
 
-#from src.main import predict_stock
+import src.main as main
 import yfinance as yf
 import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
 
 app = Flask(__name__)
 app.config['JSON_SORT_KEYS'] = False
@@ -55,9 +57,40 @@ def accueil():
 
     curr = yf.Ticker(cryptocurrency)
     
+    data = main.load_data(data_path+crypto_sel+ '-' +currency_sel+'.csv').iloc[-30:,].reset_index(drop=True)
+
+    plt.figure()
+
+    plt.plot(data.iloc[:,0], '-b')
+    plt.plot(data.iloc[:,3], '-r')
+    plt.legend(["Open Value", "Close Value"])
+    plt.title("Open and close for " + crypto_sel + " price per day (Last 30 Days) ")
+    plt.xticks([])
+
+    plt.savefig('static/img/open_close.png', transparent=True)
+
+    plt.figure()
+    plt.plot(data.iloc[:,1], '-c')
+    plt.plot(data.iloc[:,2], '-m')
+    plt.legend(["Highest", "Lowest"])
+    plt.title("Highest and Lowest for " + crypto_sel + " price per day (Last 30 Days)")
+    plt.xticks([])
+
+    plt.savefig('static/img/high_low.png', transparent=True)
+    
+    plt.figure()
+    plt.plot(data.iloc[:,4])
+    plt.title("Volume value for " + crypto_sel + " per day (Last 30 Days)")
+    plt.xticks([])
+
+    plt.savefig('static/img/volume.png', transparent=True)
+
     (crypto_json, currency_json) = fetch_cryptocurrency(crypto_sel, currency_sel)
 
-    return render_template("accueil.html", date=today_date, crypto=crypto_json, currency=currency_json, desc=curr.info['description'])
+    return render_template("accueil.html", 
+                            date=today_date, crypto=crypto_json, currency=currency_json, 
+                            desc=curr.info['description'], 
+                            open_close ='/static/img/open_close.png', high_low='/static/img/high_low.png', volume='/static/img/volume.png')
 
 @app.route('/load_currency', methods=['POST'])
 def load_currency():
@@ -99,3 +132,14 @@ def predict_stock():
     plt.show()
     return True
 '''
+
+
+@app.after_request
+def add_header(response):
+    """
+    Add headers to both force latest IE rendering engine or Chrome Frame,
+    and also to cache the rendered page for 10 minutes.
+    """
+    response.headers['X-UA-Compatible'] = 'IE=Edge,chrome=1'
+    response.headers['Cache-Control'] = 'public, max-age=0'
+    return response

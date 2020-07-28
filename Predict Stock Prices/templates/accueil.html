@@ -51,11 +51,29 @@
                         {% endif %}
                         {% endfor %}
                     </select>
-                    <input type="submit" value="Submit">
+                    <input type="submit" value="Search">
                   </form>
+                  
+
+                  <hr>
 
                 <h3>Description</h3>
                 <p>{{ desc }}</p>
+
+                <hr>
+
+                <h3>Open and Close values</h3>
+
+                <img src={{ open_close }} alt="Open and Close values" >
+
+                <h3>Highest and Lowest values</h3>
+                <img src={{ high_low }} alt="Highest and Lowest values" >
+
+                <h3>Volume values</h3>
+                <img src={{ volume }} alt="Volume values" >
+
+
+
             </div>
             <div class="col-md-3"></div>
         </div>

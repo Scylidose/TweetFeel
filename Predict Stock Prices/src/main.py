@@ -4,25 +4,24 @@ import yfinance as yf
 
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
 from sklearn import preprocessing
 
 import os.path
 from os import path
 
-from keras.layers.core import Dense, Activation, Dropout
-from keras.preprocessing import sequence
-from keras.models import Sequential
-from keras.layers import Dense, Embedding
-from keras.layers import LSTM
-from tensorflow import keras
+#from keras.layers.core import Dense, Activation, Dropout
+#from keras.preprocessing import sequence
+#from keras.models import Sequential
+#from keras.layers import Dense, Embedding
+#from keras.layers import LSTM
+#from tensorflow import keras
 
 
 def transf_list(lst):
     return [[el] for el in lst]
 
 
-def fetch_data(data_path, currency):
+def fetch_currency(data_path, currency):
     curr = yf.Ticker(currency)
 
     max_range_curr = curr.history(period="max")
@@ -59,11 +58,12 @@ def preprocess_data(data, min_max_scaler):
 
     return [(X_train, y_train), (X_test, y_test)]
 
+'''
 def predict_stock():
     data_path = "../data/BAT-CAD.csv"
     currency = "BAT-CAD"
 
-    fetch_data(data_path, currency)
+    fetch_currency(data_path, currency)
 
     data = load_data(data_path)
 
@@ -104,6 +104,7 @@ def predict_stock():
 
     return (unscaled_y_pred, unscaled_y_test)
 
+'''
 
 if __name__ == "__main__":
     predict_stock()

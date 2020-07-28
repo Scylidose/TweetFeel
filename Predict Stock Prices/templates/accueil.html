@@ -19,6 +19,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 
+    <link rel="icon" href="{{ url_for('static', filename='img/crypto_logo.png') }}">
 
 </head>
 
@@ -27,7 +28,34 @@
         <div class="row">
             <div class="col-md-3"></div>
             <div class="col-md-6 text-center">
-                <h1>Hello World</h1>
+                <h1>Crypto Currency Price Prediction</h1>
+                <h2>{{ date }}</h2>
+                <form method="POST" action="{{ url_for('load_currency') }}">
+                    <label for="crypto">Choose a cryptocurrency :</label>
+                    <br>
+                    <select id="crypto" name="crypto">
+                        {% for o in crypto %}
+                        {% if o.selected %}
+                        <option value="{{ o.crypto }}" selected>{{ o.crypto }}</option>
+                        {% else %}
+                        <option value="{{ o.crypto }}">{{ o.crypto }}</option>
+                        {% endif %}
+                        {% endfor %}
+                    </select>
+                    <select id="currency" name="currency">
+                        {% for o in currency %}
+                        {% if o.selected %}
+                        <option value="{{ o.currency }}" selected>{{ o.currency }}</option>
+                        {% else %}
+                        <option value="{{ o.currency }}">{{ o.currency }}</option>
+                        {% endif %}
+                        {% endfor %}
+                    </select>
+                    <input type="submit" value="Submit">
+                  </form>
+
+                <h3>Description</h3>
+                <p>{{ desc }}</p>
             </div>
             <div class="col-md-3"></div>
         </div>

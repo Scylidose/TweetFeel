@@ -2,7 +2,8 @@
 # coding: utf8
 
 
-import datetime
+from datetime import date
+
 from flask import (Flask, url_for, render_template,  make_response,
                    redirect, request, g, session, Response, jsonify)
 
@@ -15,27 +16,60 @@ app.config['JSON_SORT_KEYS'] = False
 
 data_path = 'data/'
 
-@app.route('/')
-def accueil():
+def fetch_cryptocurrency(crypto_sel, currency_sel):
     crypto = pd.read_csv(data_path+'cryptocurrencies.csv')['Cryptocurrency'].to_list()
 
     currency = ['USD', 'CAD', 'EUR']
 
-    print(crypto)
+    crypto_json = []
+    currency_json = []
 
-    return render_template("accueil.html")
+    for i in range(len(crypto)):
+        if crypto[i] == crypto_sel:
+            crypto_json.append({'crypto':crypto[i], 'selected': True})
+        else:
+            crypto_json.append({'crypto':crypto[i], 'selected': False})
+
+    for j in range(len(currency)):
+        if currency[j] == currency_sel:
+            currency_json.append({'currency':currency[j], 'selected': True})
+        else:
+            currency_json.append({'currency':currency[j], 'selected': False})
+
+    return (crypto_json, currency_json)
+
+@app.route('/')
+def accueil():
+    today = date.today()
+    today_date = today.strftime("%B %d, %Y")
+
+    if('cryptocurrency' in request.args):
+        cryptocurrency = request.args['cryptocurrency']
+        crypto_sel = cryptocurrency.split("-")[0]
+        currency_sel = cryptocurrency.split("-")[1]
+    else:
+        crypto_sel = "BAT"
+        currency_sel = "CAD"
+
+    (crypto_json, currency_json) = fetch_cryptocurrency(crypto_sel, currency_sel)
+
+    return render_template("accueil.html", date=today_date, crypto=crypto_json, currency=currency_json)
 
 @app.route('/load_currency', methods=['POST'])
 def load_currency():
 
-    currency = request.form["currency"]
+    crypto = request.form.get('crypto')
+    currency = request.form.get('currency')
 
-    msft = yf.Ticker(currency)
+    cryptocurrency = crypto + "-" + currency
+    msft = yf.Ticker(cryptocurrency)
 
-    data_file_path = data_path + currency + '.csv'
+    data_file_path = data_path + cryptocurrency + '.csv'
 
     max_range_batcad = msft.history(period="max")
     max_range_batcad.to_csv(data_file_path, index = False)
+    
+    return redirect(url_for('accueil', cryptocurrency=cryptocurrency))
 
 
 '''

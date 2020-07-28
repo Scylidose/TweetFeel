@@ -43,6 +43,8 @@ def accueil():
     today = date.today()
     today_date = today.strftime("%B %d, %Y")
 
+    cryptocurrency = "BAT-CAD"
+
     if('cryptocurrency' in request.args):
         cryptocurrency = request.args['cryptocurrency']
         crypto_sel = cryptocurrency.split("-")[0]
@@ -51,9 +53,11 @@ def accueil():
         crypto_sel = "BAT"
         currency_sel = "CAD"
 
+    curr = yf.Ticker(cryptocurrency)
+    
     (crypto_json, currency_json) = fetch_cryptocurrency(crypto_sel, currency_sel)
 
-    return render_template("accueil.html", date=today_date, crypto=crypto_json, currency=currency_json)
+    return render_template("accueil.html", date=today_date, crypto=crypto_json, currency=currency_json, desc=curr.info['description'])
 
 @app.route('/load_currency', methods=['POST'])
 def load_currency():
@@ -62,12 +66,12 @@ def load_currency():
     currency = request.form.get('currency')
 
     cryptocurrency = crypto + "-" + currency
-    msft = yf.Ticker(cryptocurrency)
-
+    curr = yf.Ticker(cryptocurrency)
+    
     data_file_path = data_path + cryptocurrency + '.csv'
 
-    max_range_batcad = msft.history(period="max")
-    max_range_batcad.to_csv(data_file_path, index = False)
+    max_range_curr = curr.history(period="max")
+    max_range_curr.to_csv(data_file_path, index = False)
     
     return redirect(url_for('accueil', cryptocurrency=cryptocurrency))
 

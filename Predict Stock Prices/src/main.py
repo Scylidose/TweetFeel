@@ -23,10 +23,10 @@ def transf_list(lst):
 
 
 def fetch_data(data_path, currency):
-    msft = yf.Ticker(currency)
+    curr = yf.Ticker(currency)
 
-    max_range_batcad = msft.history(period="max")
-    max_range_batcad.to_csv(data_path, index = False)
+    max_range_curr = curr.history(period="max")
+    max_range_curr.to_csv(data_path, index = False)
 
 def load_data(data_path):
     data = pd.read_csv(data_path).dropna().reset_index(drop=True)

@@ -57,7 +57,9 @@ def accueil():
 
     curr = yf.Ticker(cryptocurrency)
     
-    data = main.load_data(data_path+crypto_sel+ '-' +currency_sel+'.csv').iloc[-30:,].reset_index(drop=True)
+    main.fetch_currency(data_path, cryptocurrency)
+
+    data = main.load_data(data_path + cryptocurrency + '.csv').iloc[-30:,].reset_index(drop=True)
 
     plt.figure()
 
@@ -86,11 +88,16 @@ def accueil():
     plt.savefig('static/img/volume.png', transparent=True)
 
     (crypto_json, currency_json) = fetch_cryptocurrency(crypto_sel, currency_sel)
+    print("-------------------> ", data.iloc[:, -1])
+
+    prediction = 0
 
     return render_template("accueil.html", 
                             date=today_date, crypto=crypto_json, currency=currency_json, 
                             desc=curr.info['description'], 
-                            open_close ='/static/img/open_close.png', high_low='/static/img/high_low.png', volume='/static/img/volume.png')
+                            open = data.iloc[-1, 0], close=prediction,
+                            open_close ='/static/img/open_close.png', high_low='/static/img/high_low.png', volume='/static/img/volume.png',
+                            year_accuracy='/static/img/year_accuracy.png')
 
 @app.route('/load_currency', methods=['POST'])
 def load_currency():

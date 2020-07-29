@@ -52,10 +52,31 @@
                         {% endfor %}
                     </select>
                     <input type="submit" value="Search">
-                  </form>
-                  
+                </form>
 
-                  <hr>
+                <hr>
+
+                <table class="center">
+                    <tr>
+                        <th><label for="open">Open value</label></th>
+                        <th></th>
+                        <th><label for="close">Predicted <br>Close Value</label></th>
+                    </tr>
+                    <tr>
+                        <td><input type="text" id="open" name="open" minlength="8" size="10" value={{ open }}></td>
+                        <td><img src="/static/img/right_arrow.gif" alt="Arrow" with="200" height="50"></td>
+                        <td> <input type="text" id="close" name="close" minlength="8" size="10" value={{ close }}></td>
+
+                    </tr>
+                </table>
+
+
+                <hr>
+
+                <h3>Algorithm Accuracy</h3>
+                <img src={{ year_accuracy }} alt="Last Year Accuracy">
+
+                <hr>
 
                 <h3>Description</h3>
                 <p>{{ desc }}</p>
@@ -64,13 +85,13 @@
 
                 <h3>Open and Close values</h3>
 
-                <img src={{ open_close }} alt="Open and Close values" >
+                <img src={{ open_close }} alt="Open and Close values">
 
                 <h3>Highest and Lowest values</h3>
-                <img src={{ high_low }} alt="Highest and Lowest values" >
+                <img src={{ high_low }} alt="Highest and Lowest values">
 
                 <h3>Volume values</h3>
-                <img src={{ volume }} alt="Volume values" >
+                <img src={{ volume }} alt="Volume values">
 
 
 

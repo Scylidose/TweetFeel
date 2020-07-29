@@ -21,11 +21,11 @@ def transf_list(lst):
     return [[el] for el in lst]
 
 
-def fetch_currency(data_path, currency):
-    curr = yf.Ticker(currency)
+def fetch_currency(data_path, cryptocurrency):
+    curr = yf.Ticker(cryptocurrency)
 
     max_range_curr = curr.history(period="max")
-    max_range_curr.to_csv(data_path, index = False)
+    max_range_curr.to_csv(data_path + cryptocurrency + '.csv', index = False)
 
 def load_data(data_path):
     data = pd.read_csv(data_path).dropna().reset_index(drop=True)

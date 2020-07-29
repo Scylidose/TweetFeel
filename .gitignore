@@ -3,6 +3,5 @@
 __pycache__
 *.ipynb
 */data/*
-*/high_low.png
-*/volume.png
-*/open_close.png
+*.png
+model/

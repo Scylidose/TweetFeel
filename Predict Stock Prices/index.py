@@ -1,6 +1,11 @@
 #!/usr/bin/python3
 # coding: utf8
 
+import yfinance as yf
+
+import numpy as np
+import pandas as pd
+from sklearn.metrics import r2_score
 
 from datetime import date
 
@@ -8,15 +13,16 @@ from flask import (Flask, url_for, render_template,  make_response,
                    redirect, request, g, session, Response, jsonify)
 
 import src.main as main
-import yfinance as yf
-import pandas as pd
-import numpy as np
+
 import matplotlib.pyplot as plt
+from keras import backend as K
 
 app = Flask(__name__)
 app.config['JSON_SORT_KEYS'] = False
 
 data_path = 'data/'
+
+K.clear_session()
 
 def fetch_cryptocurrency(crypto_sel, currency_sel):
     crypto = pd.read_csv(data_path+'cryptocurrencies.csv')['Cryptocurrency'].to_list()
@@ -59,7 +65,7 @@ def accueil():
     
     main.fetch_currency(data_path, cryptocurrency)
 
-    data = main.load_data(data_path + cryptocurrency + '.csv').iloc[-30:,].reset_index(drop=True)
+    data = main.load_data(data_path, cryptocurrency).iloc[-30:,].reset_index(drop=True)
 
     plt.figure()
 
@@ -88,13 +94,24 @@ def accueil():
     plt.savefig('static/img/volume.png', transparent=True)
 
     (crypto_json, currency_json) = fetch_cryptocurrency(crypto_sel, currency_sel)
-    print("-------------------> ", data.iloc[:, -1])
 
-    prediction = 0
+    (unscaled_y_pred, unscaled_y_test, predicted_close_today) = main.predict_stock(data_path, cryptocurrency)
+
+    prediction = predicted_close_today[0][0]
+
+    plt.figure()
+    plt.plot(unscaled_y_test, label='Real Close Value')
+    plt.plot(unscaled_y_pred, label='Predicted Close Value')
+
+    plt.legend(['Real Close Value', 'Predicted Close Value'])
+    plt.xticks([])
+
+    plt.savefig('static/img/year_accuracy.png', transparent=True)
 
     return render_template("accueil.html", 
                             date=today_date, crypto=crypto_json, currency=currency_json, 
-                            desc=curr.info['description'], 
+                            desc=curr.info['description'],
+                            accuracy=round(r2_score(unscaled_y_test,unscaled_y_pred)*100, 3), 
                             open = data.iloc[-1, 0], close=prediction,
                             open_close ='/static/img/open_close.png', high_low='/static/img/high_low.png', volume='/static/img/volume.png',
                             year_accuracy='/static/img/year_accuracy.png')

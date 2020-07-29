@@ -3,4 +3,6 @@
 __pycache__
 *.ipynb
 */data/*
-*/img/*
+*/high_low.png
+*/volume.png
+*/open_close.png

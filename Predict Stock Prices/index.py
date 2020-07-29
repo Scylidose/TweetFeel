@@ -132,32 +132,6 @@ def load_currency():
     
     return redirect(url_for('accueil', cryptocurrency=cryptocurrency))
 
-
-'''
-@app.route('/predict_stock', methods=['POST'])
-def predict_stock():
-
-    (unscaled_y_pred, unscaled_y_test) = predict_stock()
-
-    print("Test Target\n")
-    print(unscaled_y_test[:10])
-    print("\n----------------\n")
-    print("Predict Target\n")
-    print(unscaled_y_pred[:10])
-
-
-    plt.gcf().set_size_inches(20, 10, forward=True)
-
-    real_close = plt.plot(unscaled_y_test[:,0], label='Real Close Value')
-    pred_close = plt.plot(unscaled_y_pred[:,0], label='Predicted Close Value')
-
-    plt.legend(['Real Close Value', 'Predicted Close Value'])
-
-    plt.show()
-    return True
-'''
-
-
 @app.after_request
 def add_header(response):
     """

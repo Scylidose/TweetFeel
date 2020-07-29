@@ -9,6 +9,7 @@ from sklearn import preprocessing
 import os.path
 from os import path
 
+import glob
 
 from keras.layers.core import Dense, Activation, Dropout
 from keras.preprocessing import sequence
@@ -24,6 +25,13 @@ def transf_list(lst):
 
 
 def fetch_currency(data_path, cryptocurrency):
+    files = glob.glob(data_path+"*.csv")
+    crypto_file = data_path+'cryptocurrencies.csv'
+
+    for i in range(len(files)):
+        if(files[i] != crypto_file):
+            os.remove(files[i])
+
     curr = yf.Ticker(cryptocurrency)
 
     max_range_curr = curr.history(period="max")
@@ -32,8 +40,6 @@ def fetch_currency(data_path, cryptocurrency):
 def load_data(data_path, cryptocurrency):
     data = pd.read_csv(data_path + cryptocurrency + '.csv').dropna().reset_index(drop=True)
     data = data.drop(['Date','Dividends', 'Stock Splits'], axis=1, errors='ignore')
-
-    print(data.shape)
 
     return data
 
@@ -80,12 +86,9 @@ def predict_stock(data_path, cryptocurrency):
         model.add(Dropout(0.3))
         model.add(Dense(units = 1, activation='linear'))
 
-        print("------- SAVING MODEL --------")
-
         model.save('src/model/model_'+cryptocurrency)
     
     else:
-        print("------- LOADING MODEL --------")
         model = keras.models.load_model("src/model/model_"+ cryptocurrency,compile=False)
 
     model.compile(optimizer = 'adam', loss = 'mean_squared_error')

@@ -15,14 +15,11 @@ from flask import (Flask, url_for, render_template,  make_response,
 import src.main as main
 
 import matplotlib.pyplot as plt
-from keras import backend as K
 
 app = Flask(__name__)
 app.config['JSON_SORT_KEYS'] = False
 
 data_path = 'data/'
-
-K.clear_session()
 
 def fetch_cryptocurrency(crypto_sel, currency_sel):
     crypto = pd.read_csv(data_path+'cryptocurrencies.csv')['Cryptocurrency'].to_list()
@@ -97,7 +94,7 @@ def accueil():
 
     (unscaled_y_pred, unscaled_y_test, predicted_close_today) = main.predict_stock(data_path, cryptocurrency)
 
-    prediction = predicted_close_today[0][0]
+    prediction = predicted_close_today[0]
 
     plt.figure()
     plt.plot(unscaled_y_test, label='Real Close Value')
@@ -112,7 +109,7 @@ def accueil():
                             date=today_date, crypto=crypto_json, currency=currency_json, 
                             desc=curr.info['description'],
                             accuracy=round(r2_score(unscaled_y_test,unscaled_y_pred)*100, 3), 
-                            open = data.iloc[-1, 0], close=prediction,
+                            open = data.iloc[-1, 0], close=prediction.round(decimals=5),
                             open_close ='/static/img/open_close.png', high_low='/static/img/high_low.png', volume='/static/img/volume.png',
                             year_accuracy='/static/img/year_accuracy.png')
 

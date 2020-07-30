@@ -18,6 +18,7 @@ from keras.layers import Dense, Embedding
 from keras.layers import LSTM
 
 from tensorflow import keras
+from keras import backend as K
 
 
 def transf_list(lst):
@@ -54,7 +55,7 @@ def preprocess_data(data, min_max_scaler):
     sliced_day = len(X) - 365
 
     X_train = x_scaled[0:sliced_day]
-    X_test = x_scaled[sliced_day:-1]
+    X_test = x_scaled[sliced_day:]
 
     y_train = y_scaled[0:sliced_day]
     y_test = y_scaled[sliced_day:-1]
@@ -74,37 +75,38 @@ def predict_stock(data_path, cryptocurrency):
 
     [(X_train, y_train), (X_test, y_test)] = preprocess_data(data, min_max_scaler)
 
+    K.clear_session()
+
     if(path.exists("src/model/model_"+cryptocurrency) == False):
-
-        model = Sequential()
-
-        model.add(LSTM(units = 100, return_sequences = True, input_shape = (X_train.shape[1], 1)))
-        model.add(Dropout(0.3))
-        model.add(LSTM(units = 50, return_sequences = True))
-        model.add(Dropout(0.3))
-        model.add(LSTM(units = 50))
-        model.add(Dropout(0.3))
-        model.add(Dense(units = 1, activation='linear'))
-
-        model.save('src/model/model_'+cryptocurrency)
-    
+        model = get_model(X_train, cryptocurrency)
     else:
         model = keras.models.load_model("src/model/model_"+ cryptocurrency,compile=False)
 
     model.compile(optimizer = 'adam', loss = 'mean_squared_error')
 
     model.fit(X_train, y_train, epochs = 10, batch_size = 32)
-
+    
     y_pred = model.predict(X_test)
+
+    K.clear_session()
 
     unscaled_y_pred = min_max_scaler.inverse_transform(y_pred)
     unscaled_y_test = min_max_scaler.inverse_transform(y_test)
 
-    today = np.array([[data.iloc[-1, 0]]])
-    y_today = np.array([min_max_scaler.fit_transform(today)])
-    y_pred_today = model.predict(y_today)
+    today = unscaled_y_pred[len(unscaled_y_pred) - 1]
+    return (unscaled_y_pred[:-1], unscaled_y_test, today)
 
-    unscaled_y_pred_today = min_max_scaler.inverse_transform(y_pred_today)
+def get_model(X_train, cryptocurrency):
+    model = Sequential()
 
+    model.add(LSTM(units = 100, return_sequences = True, input_shape = (X_train.shape[1], 1)))
+    model.add(Dropout(0.3))
+    model.add(LSTM(units = 50, return_sequences = True))
+    model.add(Dropout(0.3))
+    model.add(LSTM(units = 50))
+    model.add(Dropout(0.3))
+    model.add(Dense(units = 1, activation='linear'))
 
-    return (unscaled_y_pred[:,0], unscaled_y_test[:,0], unscaled_y_pred_today)
+    model.save('src/model/model_'+cryptocurrency)
+
+    return model

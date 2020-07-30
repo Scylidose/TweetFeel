@@ -92,18 +92,29 @@ def accueil():
 
     (crypto_json, currency_json) = fetch_cryptocurrency(crypto_sel, currency_sel)
 
-    (unscaled_y_pred, unscaled_y_test, predicted_close_today) = main.predict_stock(data_path, cryptocurrency)
+    prediction_result = main.predict_stock(data_path, cryptocurrency)
+
+    (unscaled_y_pred, unscaled_y_test, predicted_close_today) = prediction_result[0]
+
+    (unscaled_X_pred_future, unscaled_y_pred_future) = prediction_result[1]
 
     prediction = predicted_close_today[0]
 
     plt.figure()
     plt.plot(unscaled_y_test, label='Real Close Value')
     plt.plot(unscaled_y_pred, label='Predicted Close Value')
-
     plt.legend(['Real Close Value', 'Predicted Close Value'])
+    plt.title("Predicted and Real close value for " + crypto_sel + " (Last Year)")
     plt.xticks([])
 
-    plt.savefig('static/img/year_accuracy.png', transparent=True)
+    plt.figure()
+    plt.plot(unscaled_X_pred_future, label='Predicted Open Value')
+    plt.plot(unscaled_y_pred_future, label='Predicted Close Value')
+    plt.legend(['Predicted Open Value', 'Predicted Close Value'])
+    plt.title("Predicted open and Predicted close value for " + crypto_sel + " (Next 30 days)")
+    plt.xticks([])
+
+    plt.savefig('static/img/future_pred.png', transparent=True)
 
     return render_template("accueil.html", 
                             date=today_date, crypto=crypto_json, currency=currency_json, 
@@ -111,7 +122,7 @@ def accueil():
                             accuracy=round(r2_score(unscaled_y_test,unscaled_y_pred)*100, 3), 
                             open = data.iloc[-1, 0], close=prediction.round(decimals=5),
                             open_close ='/static/img/open_close.png', high_low='/static/img/high_low.png', volume='/static/img/volume.png',
-                            year_accuracy='/static/img/year_accuracy.png')
+                            year_accuracy='/static/img/year_accuracy.png', future_pred='/static/img/future_pred.png')
 
 @app.route('/load_currency', methods=['POST'])
 def load_currency():

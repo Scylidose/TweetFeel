@@ -10,6 +10,7 @@ import os.path
 from os import path
 
 import glob
+import random
 
 from keras.layers.core import Dense, Activation, Dropout
 from keras.preprocessing import sequence
@@ -77,10 +78,7 @@ def predict_stock(data_path, cryptocurrency):
 
     K.clear_session()
 
-    if(path.exists("src/model/model_"+cryptocurrency) == False):
-        model = get_model(X_train, cryptocurrency)
-    else:
-        model = keras.models.load_model("src/model/model_"+ cryptocurrency,compile=False)
+    model = get_model(X_train, cryptocurrency)
 
     model.compile(optimizer = 'adam', loss = 'mean_squared_error')
 
@@ -88,13 +86,18 @@ def predict_stock(data_path, cryptocurrency):
     
     y_pred = model.predict(X_test)
 
+    y_pred_future = predict_future(model, X_test[-1], y_pred[-1])
+    unscaled_X_pred_future = min_max_scaler.inverse_transform(y_pred_future.iloc[:,0].to_list())
+    unscaled_y_pred_future = min_max_scaler.inverse_transform(y_pred_future.iloc[:,1].to_list())
+
     K.clear_session()
 
     unscaled_y_pred = min_max_scaler.inverse_transform(y_pred)
     unscaled_y_test = min_max_scaler.inverse_transform(y_test)
 
     today = unscaled_y_pred[len(unscaled_y_pred) - 1]
-    return (unscaled_y_pred[:-1], unscaled_y_test, today)
+
+    return [(unscaled_y_pred[:-1], unscaled_y_test, today), (unscaled_X_pred_future, unscaled_y_pred_future)]
 
 def get_model(X_train, cryptocurrency):
     model = Sequential()
@@ -107,6 +110,27 @@ def get_model(X_train, cryptocurrency):
     model.add(Dropout(0.3))
     model.add(Dense(units = 1, activation='linear'))
 
-    model.save('src/model/model_'+cryptocurrency)
-
     return model
+
+def predict_future(model, X_today, y_today):
+    nb_days = 30
+    y_pred_future = pd.DataFrame(data={'Predicted Open': [X_today], 'Predicted Close': [y_today]})
+
+    for i in range(nb_days):
+        Adj_close = y_pred_future.iloc[-1:, 1].values
+        
+        random_adj = random.randint(1, 5)
+
+        if(random.randint(0, 1) == 0):
+            Adj_close += Adj_close * (random_adj/100)
+        else:
+            Adj_close -= Adj_close * (random_adj/100)
+
+
+        X_tomorrow = np.asarray([[Adj_close]])
+        y_pred = model.predict(X_tomorrow)
+
+        y_pred_future.loc[len(y_pred_future)] = [Adj_close, y_pred[0]]
+
+    print(y_pred_future.iloc[:,1].to_list())
+    return y_pred_future

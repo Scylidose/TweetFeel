@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Predict Stock Price</title>
+
+    <!-- Feuille de style de l'application -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <!-- Bootstrap -->
+    <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+
+    <!-- JQuery -->
+    <script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+    <link rel="icon" href="{{ url_for('static', filename='img/crypto_logo.png') }}">
+
+</head>
+
+<body>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8 text-center">
+                <div class="topcorner">
+                    <h2 style="padding-left:10px; padding-right:10px">{{ date }}</h2>
+                    <h1 class="center">Basic Attention Token <br>Price Prediction</h1>
+                </div>
+
+                <table class="center">
+                    <tr>
+                        <th><label for="open">Open value</label></th>
+                        <th> <img class="img-fluid" height="50" width="100" src="../static/img/right_arrow.png"
+                                alt="right_arrow">
+                        </th>
+                        <th><label for="close">Predicted <br>Close Value</label></th>
+                    </tr>
+                    <tr>
+                        <td><input type="text" id="open" name="open" minlength="8" size="10" value={{ open }}></td>
+                        <td></td>
+                        <td> <input type="text" id="close" name="close" minlength="8" size="10" value={{ close }}></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+
+                        {% if diff < 0: %}
+                        <td class="red">{{ diff }} % </td>
+                        {% else: %}
+                        <td class="green">{{ diff }} % </td>
+                        {% endif %}
+                    </tr>
+                </table>
+
+                <h3>Accuracy Score</h3>
+                <h4><span class="green" style="padding:3px 5px; border: 1px solid black"> {{ accuracy }} % </span></h4>
+
+                <h3>Algorithm Accuracy</h3>
+                <img class="img-fluid white-img" src={{ year_accuracy }} alt="Last Year Accuracy">
+
+
+            </div>
+            <div class="col-md-4">
+                <h2>Last 30 Days</h2>
+                <hr>
+                <img class="info white-img" src={{ open_close }} alt="Open and Close values">
+                <img class="info white-img" src={{ high_low }} alt="Highest and Lowest values">
+                <img class="info white-img" src={{ volume }} alt="Volume values">
+
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -42,7 +42,7 @@ def fetch_cryptocurrency(crypto_sel, currency_sel):
     return (crypto_json, currency_json)
 
 def save_plot(data, first_data, second_data, color, legend, title, save):
-    fig, ax = plt.subplots()
+    _, ax = plt.subplots()
 
     plt.plot(data.iloc[:, 0], data.iloc[:,first_data], color[0])
     if second_data is not None:

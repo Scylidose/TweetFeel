@@ -14,3 +14,13 @@ hr {
 th {
     padding:10px !important;
 }
+
+.red {
+    color:red;
+    font-size: large;
+    font-weight: bold;
+}
+
+.green {
+    color:greenyellow
+}

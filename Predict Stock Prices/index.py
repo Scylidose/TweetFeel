@@ -50,7 +50,7 @@ def save_plot(data, first_data, second_data, color, legend, title, save):
         plt.legend(legend)
 
     plt.title(title)
-    plt.xticks(rotation='vertical')
+    plt.xticks(rotation=45)
 
     every_nth = 3
     for n, label in enumerate(ax.xaxis.get_ticklabels()):
@@ -75,12 +75,12 @@ def accueil():
         data_sel = data.iloc[-30:,].reset_index(drop=True)
 
         save_plot(data_sel, 1, 4, ['-b', '-r'], ["Open Value", "Close Value"],
-        "Open and close for " + cryptocurrency + " price per day (Last 30 Days) ", "open_close")
+        "Open and close for " + cryptocurrency + " price per day", "open_close")
 
         save_plot(data_sel, 2, 3, ['-c', '-m'], ["Highest", "Lowest"],
-        "Highest and Lowest for " + cryptocurrency + " price per day (Last 30 Days)", "high_low")
+        "Highest and Lowest for " + cryptocurrency + " price per day", "high_low")
 
-        save_plot(data_sel, 6, None,['-g'], None, "Volume value for " + cryptocurrency + " per day (Last 30 Days)", "volume")
+        save_plot(data_sel, 6, None,['-g'], None, "Volume value for " + cryptocurrency + " per day", "volume")
 
         prediction_result = main.predict_stock(data_path, cryptocurrency)
 
@@ -109,9 +109,9 @@ def accueil():
         plt.plot(unscaled_y_pred[:,0], '-r', label='Predicted Close Value')
         plt.legend(['Real Close Value', 'Predicted Close Value'])
         plt.title("Predicted and Real close value for " + cryptocurrency + " (Last Year)")
-        plt.xticks(rotation='vertical')
+        plt.xticks(rotation=45)
 
-        every_nth = 10
+        every_nth = 14
         for n, label in enumerate(ax.xaxis.get_ticklabels()):
             if n % every_nth != 0:
                 label.set_visible(False)

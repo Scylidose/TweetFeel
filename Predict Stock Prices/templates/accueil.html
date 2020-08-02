@@ -24,61 +24,57 @@
 </head>
 
 <body>
-    <div class="container">
+
+    <div class="container-fluid">
         <div class="row">
-            <div class="col-md-3"></div>
-            <div class="col-md-6 text-center">
-                <h1>Basic Attention Token <br>Price Prediction</h1>
-                <h2>{{ date }}</h2>
-                <hr>
+            <div class="col-md-8 text-center">
+                <div class="topcorner">
+                    <h2 style="padding-left:10px; padding-right:10px">{{ date }}</h2>
+                    <h1 class="center">Basic Attention Token <br>Price Prediction</h1>
+                </div>
+
                 <table class="center">
                     <tr>
                         <th><label for="open">Open value</label></th>
-                        <th></th>
+                        <th> <img class="img-fluid" height="50" width="100" src="../static/img/right_arrow.png"
+                                alt="right_arrow">
+                        </th>
                         <th><label for="close">Predicted <br>Close Value</label></th>
                     </tr>
                     <tr>
                         <td><input type="text" id="open" name="open" minlength="8" size="10" value={{ open }}></td>
-                        <td><img src="/static/img/right_arrow.gif" alt="Arrow" with="200" height="50"></td>
+                        <td></td>
                         <td> <input type="text" id="close" name="close" minlength="8" size="10" value={{ close }}></td>
-                        
                     </tr>
                     <tr>
                         <td></td>
-                        {% if diff < 0: %}
-                            <td class="red">{{ diff }} % </td>
-                        {% else: %}
-                            <td class="green">{{ diff }} % </td>
-                        {% endif %}
                         <td></td>
+
+                        {% if diff < 0: %}
+                        <td class="red">{{ diff }} % </td>
+                        {% else: %}
+                        <td class="green">{{ diff }} % </td>
+                        {% endif %}
                     </tr>
                 </table>
 
-
-                <hr>
+                <h3>Accuracy Score</h3>
+                <h4><span class="green" style="padding:3px 5px; border: 1px solid black"> {{ accuracy }} % </span></h4>
 
                 <h3>Algorithm Accuracy</h3>
-                <img src={{ year_accuracy }} alt="Last Year Accuracy">
-
-                <h4>Accuracy Score</h4>
-                <h5>{{ accuracy }} %</h5>
-                
-                <hr>
-
-                <h3>Open and Close values</h3>
-
-                <img src={{ open_close }} alt="Open and Close values">
-
-                <h3>Highest and Lowest values</h3>
-                <img src={{ high_low }} alt="Highest and Lowest values">
-
-                <h3>Volume values</h3>
-                <img src={{ volume }} alt="Volume values">
-
+                <img class="img-fluid white-img" src={{ year_accuracy }} alt="Last Year Accuracy">
 
 
             </div>
-            <div class="col-md-3"></div>
+            <div class="col-md-4">
+                <h2>Last 30 Days</h2>
+                <hr>
+                <img class="info white-img" src={{ open_close }} alt="Open and Close values">
+                <img class="info white-img" src={{ high_low }} alt="Highest and Lowest values">
+                <img class="info white-img" src={{ volume }} alt="Volume values">
+
+
+            </div>
         </div>
     </div>
 </body>

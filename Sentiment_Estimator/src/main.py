@@ -119,10 +119,12 @@ def get_tweets(search, auth):
 
     search_words = search
 
+    nb_tweets = 10
+
     public_tweets = tweepy.Cursor(api.search,
               q=search_words,
               lang="en", 
-              result_type='mixed').items(200)
+              result_type='mixed').items(nb_tweets)
 
     tweets = {'Tweets': []}
 

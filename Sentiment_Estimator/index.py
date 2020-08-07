@@ -28,13 +28,23 @@ def accueil():
     percentage = None
     accuracy = None
 
-    if search:
-        data = main.load_data(data_path)
-        accuracy, model = main.get_model(data)
+   # search = None
+    
+    data = main.load_data(data_path)
+    accuracy, model = main.get_model(data)
+    accuracy = round(accuracy*100,3)
 
+    if search:
         tweets = main.get_tweets(search, auth)
 
         percentage = main.predict_tweets_sent(tweets, model)
+
+        plt.figure()
+        happy_ratio = (percentage * len(tweets) / 100)
+        plt.bar([0, 1], [happy_ratio, len(tweets) - happy_ratio], color=("g", "r"))
+        plt.xticks([0, 1], ('Positive', 'Negative'))
+        plt.title("Bar Plot of Positive and Negative Tweets ratio")
+        plt.savefig('static/img/bar_count.png', transparent=True)
 
     return render_template("accueil.html", accuracy=accuracy, percentage=percentage, search=search)
 

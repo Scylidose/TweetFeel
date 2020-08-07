@@ -2,10 +2,16 @@ body{
     background-image: linear-gradient(white, #1DA1F2);
     background-repeat: no-repeat;
     background-attachment: fixed;
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
 .container-fluid {
     padding: 0 !important;
+}
+
+hr {
+    border-top: 3px solid rgb(100, 184, 223) !important;
 }
 
 .topcorner {
@@ -21,4 +27,20 @@ body{
 .center {
     margin-left: auto;
     margin-right: auto;
+}
+
+.info {
+    height: 300px;
+    width: auto;
+    margin-bottom: 5px;
+}
+
+#search {
+    width: 50%;
+    padding: 5px 10px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid black;
+    border-radius: 5px;
+    box-sizing: border-box;
 }

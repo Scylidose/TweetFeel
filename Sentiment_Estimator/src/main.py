@@ -7,6 +7,9 @@ import matplotlib.pyplot as plt
 
 import pickle
 import tweepy
+import random 
+import requests
+import json
 
 from nltk.corpus import stopwords
 from nltk.stem.wordnet import WordNetLemmatizer
@@ -119,21 +122,27 @@ def get_tweets(search, auth):
 
     search_words = search
 
-    nb_tweets = 10
+    nb_tweets = 100
 
     public_tweets = tweepy.Cursor(api.search,
               q=search_words,
               lang="en", 
-              result_type='mixed').items(nb_tweets)
+              result_type='popular').items(nb_tweets)
 
     tweets = {'Tweets': []}
 
+    tweets_example = []
+
     for tweet in public_tweets:
         tweets['Tweets'].append(tweet.text)
-        
+        if random.randrange(8) == 1:
+            res = requests.get("https://publish.twitter.com/oembed?url=https://twitter.com/Interior/status/"+str(tweet.id))
+            res_json = json.loads(res.text)
+            tweets_example.append(res_json['html'])
+    
     tweets_df = pd.DataFrame(data=tweets)
 
-    return tweets_df
+    return tweets_df, tweets_example
 
 def predict_tweets_sent(tweets, model):
     tweets_predictions = model.predict(tweets.iloc[:,0])

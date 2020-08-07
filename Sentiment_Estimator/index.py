@@ -15,6 +15,7 @@ import src.main as main
 import matplotlib.pyplot as plt
 
 app = Flask(__name__)
+
 app.config['JSON_SORT_KEYS'] = False
 
 data_path = 'data/'
@@ -26,16 +27,17 @@ def accueil():
     search = request.form.get('search')
 
     percentage = None
-    accuracy = None
 
-   # search = None
+    tweets_example = None
+
+    #search = None
     
     data = main.load_data(data_path)
     accuracy, model = main.get_model(data)
     accuracy = round(accuracy*100,3)
 
     if search:
-        tweets = main.get_tweets(search, auth)
+        tweets, tweets_example = main.get_tweets(search, auth)
 
         percentage = main.predict_tweets_sent(tweets, model)
 
@@ -46,7 +48,7 @@ def accueil():
         plt.title("Bar Plot of Positive and Negative Tweets ratio")
         plt.savefig('static/img/bar_count.png', transparent=True)
 
-    return render_template("accueil.html", accuracy=accuracy, percentage=percentage, search=search)
+    return render_template("accueil.html", accuracy=accuracy, percentage=percentage, search=search, examples=tweets_example)
 
 @app.after_request
 def add_header(response):

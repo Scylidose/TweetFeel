@@ -44,3 +44,9 @@ hr {
     border-radius: 5px;
     box-sizing: border-box;
 }
+
+.center-div
+{
+  margin: 0 auto;
+  
+}

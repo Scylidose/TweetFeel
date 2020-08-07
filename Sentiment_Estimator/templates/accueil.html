@@ -36,10 +36,11 @@
                     <div>
                         <label for="search">Type Search Word</label><br>
                         {% if percentage != None %}
-                        <input id="search" type="text" name="search" placeholder= {{ search }}>
-                        {% else %} 
-                        <input id="search" type="text" name="search" placeholder="#Trump, PewDiePie, One Piece, Netflix, ...">
-                        {% endif %} 
+                        <input id="search" type="text" name="search" placeholder={{ search }}>
+                        {% else %}
+                        <input id="search" type="text" name="search"
+                            placeholder="#Trump, PewDiePie, One Piece, Netflix, ...">
+                        {% endif %}
                     </div>
                     <div>
                         <input type="submit" value="Search">
@@ -55,15 +56,26 @@
                 <img src="../static/img/happy_emoji.png" alt="Pharrell Williams">
 
                 {% endif %}
-                {% endif %} 
-                
+                {% endif %}
+
                 <h3>Algorithm Accuracy Score</h3>
                 <h4><span style="padding:3px 5px; border: 1px solid black"> {{ accuracy }} % </span></h4>
-
-            </div>
-             {% if percentage == None %}
-            <div class="col-md-4" style="padding-right:0px !important">
                 
+                {% if percentage != None %}
+                <br>
+                <div style='width:100%'>
+                    <div style='width:50%;margin:0px auto'>
+                        {% for example in examples %}
+                        {{ example | safe }}
+                        {% endfor %}
+                    </div>
+                </div>
+
+                {% endif %}
+            </div>
+            {% if percentage == None %}
+            <div class="col-md-4" style="padding-right:0px !important">
+
             </div>
             {% else %}
             <div class="col-md-4" style="padding-right:0px !important">

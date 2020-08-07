@@ -31,7 +31,7 @@
                 <div class="topcorner">
                     <h1 class="center">Twitter Search <br>Sentiment Estimator</h1>
                 </div>
-
+                <br>
                 <form method="post">
                     <div>
                         <label for="search">Type Search Word</label><br>
@@ -49,14 +49,13 @@
                 {% if percentage != None %}
                 <h2>Sentiment score</h2>
                 <h3><span> {{ percentage }} % </span></h3>
-                {% endif %} 
-                
                 {% if percentage <= 50 %}
                 <img src="../static/img/sad_emoji.png" alt="Big Sad">
                 {% else %}
                 <img src="../static/img/happy_emoji.png" alt="Pharrell Williams">
 
                 {% endif %}
+                {% endif %} 
                 
                 <h3>Algorithm Accuracy Score</h3>
                 <h4><span style="padding:3px 5px; border: 1px solid black"> {{ accuracy }} % </span></h4>

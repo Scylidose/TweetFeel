@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Predict Stock Price</title>
+
+    <!-- Feuille de style de l'application -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <!-- Bootstrap -->
+    <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+
+    <!-- JQuery -->
+    <script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+    <link rel="icon" href="{{ url_for('static', filename='img/twitter_monocle.png') }}">
+
+</head>
+
+<body>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8 text-center">
+                <div class="topcorner">
+                    <h1 class="center">Twitter Search <br>Sentiment Estimator</h1>
+                </div>
+
+                <form method="post">
+                    <div>
+                        <label for="search">Type Search Word</label>
+                        <input id="search" type="text" name="search" value= {{ search }}>
+                    </div>
+                    <div>
+                        <input type="submit" value="Search">
+                    </div>
+                </form>
+
+                <h3>Sentiment score</h3>
+                <h4><span> {{ percentage }} % </span></h4>
+
+                <h3>Accuracy Score</h3>
+                <h4><span style="padding:3px 5px; border: 1px solid black"> {{ accuracy }} % </span></h4>
+
+            </div>
+            <div class="col-md-4">
+                <h2>Search Stats</h2>
+                <hr>
+                <img class="info white-img" src={{ volume }} alt="Volume values">
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

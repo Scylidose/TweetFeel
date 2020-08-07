@@ -1,0 +1,24 @@
+body{
+    background-image: linear-gradient(white, #1DA1F2);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.container-fluid {
+    padding: 0 !important;
+}
+
+.topcorner {
+    display: flex;
+    align-items: center;
+}
+
+.topcorner h2{
+    width: 200px;
+    border-bottom: black 3px solid;
+}
+
+.center {
+    margin-left: auto;
+    margin-right: auto;
+}

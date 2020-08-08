@@ -106,14 +106,19 @@ def get_model(data):
     return accuracy_score(predictions,label_test), pipeline
 
 def get_auth():
-    consumer_key = "Qs13neYllWbteSFCSMCBNPPUf"
-    consumer_secret = "PLgtHZmyKenCdN0UoUN8cdKjzs2VsvEIJv1jPfIHKXXVx6TNiO"
+    auth = ""
+    
+    with open('config/keys.json') as json_file:
+        data = json.load(json_file)
+        
+        consumer_key = data["consumer_key"]
+        consumer_secret = data["consumer_secret"]
 
-    access_token = "1140023161980968961-gvTNlDyHEFpSXjmNKWLBdneYwsVzTK"
-    access_token_secret = "ENC73nuYB0HlGuNczFYG4VeLn0zAvLgWoVtA6AsTXCrhs"
+        access_token = data["access_token"]
+        access_token_secret = data["access_token_secret"]
 
-    auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-    auth.set_access_token(access_token, access_token_secret)
+        auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+        auth.set_access_token(access_token, access_token_secret)
 
     return auth
 

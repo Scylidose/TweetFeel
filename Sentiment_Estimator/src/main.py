@@ -17,7 +17,6 @@ from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer, T
 
 
 from textblob import TextBlob
-from wordcloud import WordCloud
 
 import nltk
 from nltk.probability import FreqDist
@@ -170,3 +169,10 @@ def predict_tweets_sent(tweets, model):
 
     return percentage
 
+def get_bigrams(tokens):
+    return [(tokens[i],tokens[i+1]) for i in range(0,len(tokens)-1)]
+
+def get_common_bigrams(tokens):
+    bigrams_vocab = get_bigrams(tokens)
+    freq_dist = FreqDist(bigrams_vocab)
+    return freq_dist.most_common(5)

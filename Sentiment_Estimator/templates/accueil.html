@@ -60,7 +60,7 @@
 
                 <h3>Algorithm Accuracy Score</h3>
                 <h4><span style="padding:3px 5px; border: 1px solid black"> {{ accuracy }} % </span></h4>
-                
+
                 {% if percentage != None %}
                 <br>
                 <div style='width:100%'>
@@ -82,6 +82,15 @@
                 <h2>Search Stats</h2>
                 <hr>
                 <img class="info" src="../static/img/bar_count.png" alt="Bar Plot">
+                <hr class="little">
+                <img class="info" src="../static/img/word_cloud.png" alt="WordCloud">
+                <hr class="little">
+                <h4 class="text-center">Most Common Bi-Grams</h4>
+                {% for bigram in bigrams %}
+                <h5 class="text-center">{{ bigram[0] }}</h5>
+                {% endfor %}
+                <hr class="little">
+
             </div>
             {% endif %}
         </div>

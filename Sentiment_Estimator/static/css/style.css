@@ -54,3 +54,15 @@ hr {
   margin: 0 auto;
   
 }
+
+.tweeter_block {
+    border: 1px solid black;
+
+    border-radius: 15px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+.twitter-tweet {
+    margin: 0px 0px !important;
+}

@@ -8,7 +8,6 @@ import matplotlib.pyplot as plt
 import pickle
 import tweepy
 import random 
-import requests
 import json
 
 from nltk.corpus import stopwords
@@ -141,19 +140,13 @@ def get_tweets(search, auth):
 
     for tweet in public_tweets:
         tweets['Tweets'].append(tweet.text)
-        tweets_example.append(tweet.id)
+        tweets_example.append(tweet)
 
     random_tweets = random.choices(tweets_example, k=5)
-
-    tweets_html = []
-    for tweet in random_tweets:
-        res = requests.get("https://publish.twitter.com/oembed?url=https://twitter.com/Interior/status/"+str(tweet))
-        res_json = json.loads(res.text)
-        tweets_html.append(res_json['html'])
     
     tweets_df = pd.DataFrame(data=tweets)
 
-    return tweets_df, tweets_html
+    return tweets_df, random_tweets
 
 def predict_tweets_sent(tweets, model):
     tweets_predictions = model.predict(tweets.iloc[:,0])

@@ -15,6 +15,9 @@ import src.main as main
 import matplotlib.pyplot as plt
 from wordcloud import WordCloud
 
+import requests
+import json
+
 app = Flask(__name__)
 
 app.config['JSON_SORT_KEYS'] = False
@@ -31,6 +34,10 @@ def accueil():
 
     tweets_example = None
 
+    common_bigrams = ""
+
+    predict_tweets_random = []
+
     #search = None
     
     data = main.load_data(data_path)
@@ -38,11 +45,25 @@ def accueil():
     accuracy = round(accuracy*100,3)
 
     if search:
-        tweets, tweets_example = main.get_tweets(search, auth)
+        tweets, random_tweets = main.get_tweets(search, auth)
 
         percentage = main.predict_tweets_sent(tweets, model)
 
         process_tweet = tweets.iloc[:, 0].apply(main.preprocess_data)
+
+        tweets_random_df = {'Tweets': []}
+
+        tweets_example = []
+        for tweet in random_tweets:
+            res = requests.get("https://publish.twitter.com/oembed?url=https://twitter.com/Interior/status/"+str(tweet.id))
+            res_json = json.loads(res.text)
+            tweets_example.append(res_json['html'])
+
+            tweets_random_df['Tweets'].append(tweet.text)
+    
+        tweets_random_df = pd.DataFrame(data=tweets_random_df)
+
+        predict_tweets_random = model.predict(tweets_random_df.iloc[:, 0])
 
         plt.figure()
         happy_ratio = (percentage * len(tweets) / 100)
@@ -61,11 +82,13 @@ def accueil():
         plt.savefig('static/img/word_cloud.png', transparent=True)
 
 
-    tokens = [inner for outer in process_tweet.to_list() for inner in outer]
+        tokens = [inner for outer in process_tweet.to_list() for inner in outer]
 
-    common_bigrams = main.get_common_bigrams(tokens)
+        common_bigrams = main.get_common_bigrams(tokens)
+    
     return render_template("accueil.html", accuracy=accuracy, percentage=percentage,
-                                         search=search, examples=tweets_example, bigrams=common_bigrams)
+                                         search=search, examples=tweets_example, random_pred=predict_tweets_random,
+                                         bigrams=common_bigrams)
 
 @app.after_request
 def add_header(response):

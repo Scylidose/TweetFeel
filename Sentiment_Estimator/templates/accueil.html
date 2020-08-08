@@ -65,8 +65,15 @@
                 <br>
                 <div style='width:100%'>
                     <div style='width:50%;margin:0px auto'>
-                        {% for example in examples %}
-                        {{ example | safe }}
+                        {% for i in range(examples | length) %}
+                        <div class="tweeter_block">
+                            {{ examples[i] | safe }}
+                            {% if random_pred [i] == 4 %}
+                            <img width="50" height="50" src="../static/img/sad_emoji.png" alt="Big Sad">
+                            {% else %}
+                            <img width="50" height="50" src="../static/img/happy_emoji.png" alt="Pharrell Williams">
+                            {% endif %}
+                        </div>
                         {% endfor %}
                     </div>
                 </div>

@@ -23,6 +23,7 @@ import nltk
 from nltk.probability import FreqDist
 
 from sklearn.naive_bayes import MultinomialNB
+from sklearn.linear_model import LogisticRegression
 
 from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
@@ -75,39 +76,39 @@ def get_model(data):
     try:
 
         predictions = pd.read_csv("src/results/s140_pred.csv").iloc[:, 0]
-        label_test = pd.read_csv("src/results/s140_pred.csv").iloc[:, 1]
+        y_test = pd.read_csv("src/results/s140_pred.csv").iloc[:, 1]
 
         with open(pkl_filename, 'rb') as file:
             pipeline = pickle.load(file)
 
     except Exception:
-        msg_train, msg_test, label_train, label_test = train_test_split(data.iloc[:, 1], data.iloc[:, 0], test_size=0.2)
+        X_train, X_test, y_train, y_test = train_test_split(data.iloc[:, 1], data.iloc[:, 0], test_size=0.2)
 
         pipeline = Pipeline([
         ('bow',CountVectorizer(analyzer=preprocess_data)),
         ('tfidf', TfidfTransformer()),
-        ('classifier', MultinomialNB())])
+        ('classifier', LogisticRegression(penalty='l2', tol=0.001, C=1))])
 
-        pipeline.fit(msg_train,label_train)
+        pipeline.fit(X_train,y_train)
 
         with open(pkl_filename, 'wb') as file:
             pickle.dump(pipeline, file)
     
-        predictions = pipeline.predict(msg_test)
+        predictions = pipeline.predict(X_test)
 
-        save_pred = {'Predictions': predictions, 'y_test': label_test}
+        save_pred = {'Predictions': predictions, 'y_test': y_test}
 
         pd.DataFrame(save_pred).to_csv('src/results/s140_pred.csv', index = None)
 
-    print(classification_report(predictions,label_test))
-    print(confusion_matrix(predictions,label_test))
-    print(accuracy_score(predictions,label_test))
+    print(classification_report(predictions,y_test))
+    print(confusion_matrix(predictions,y_test))
+    print(accuracy_score(predictions,y_test))
     
-    return accuracy_score(predictions,label_test), pipeline
+    return accuracy_score(predictions,y_test), pipeline
 
 def get_auth():
     auth = ""
-    
+
     with open('config/keys.json') as json_file:
         data = json.load(json_file)
         
@@ -132,7 +133,8 @@ def get_tweets(search, auth):
     public_tweets = tweepy.Cursor(api.search,
               q=search_words,
               lang="en", 
-              result_type='popular').items(nb_tweets)
+              since = "2020-01-01",
+              result_type='mixed').items(nb_tweets)
 
     tweets = {'Tweets': []}
 
@@ -140,14 +142,19 @@ def get_tweets(search, auth):
 
     for tweet in public_tweets:
         tweets['Tweets'].append(tweet.text)
-        if random.randrange(8) == 1:
-            res = requests.get("https://publish.twitter.com/oembed?url=https://twitter.com/Interior/status/"+str(tweet.id))
-            res_json = json.loads(res.text)
-            tweets_example.append(res_json['html'])
+        tweets_example.append(tweet.id)
+
+    random_tweets = random.choices(tweets_example, k=5)
+
+    tweets_html = []
+    for tweet in random_tweets:
+        res = requests.get("https://publish.twitter.com/oembed?url=https://twitter.com/Interior/status/"+str(tweet))
+        res_json = json.loads(res.text)
+        tweets_html.append(res_json['html'])
     
     tweets_df = pd.DataFrame(data=tweets)
 
-    return tweets_df, tweets_example
+    return tweets_df, tweets_html
 
 def predict_tweets_sent(tweets, model):
     tweets_predictions = model.predict(tweets.iloc[:,0])

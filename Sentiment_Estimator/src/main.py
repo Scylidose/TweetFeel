@@ -35,14 +35,14 @@ def load_data(data_path):
 
 def clean_tweet(tweet):
     
-    excluded_punct = [".", ",", ":", "^", ";", "#"]
+    excluded_punct = [".", ",", ":", "^", ";", "#", "-", "_"]
     
     tweet_list = tweet.split()
     clean_tokens = [re.sub('@[\w]+','',t) for t in tweet_list if re.match(r'[^\d]*$', t)]
     clean_s = ' '.join(clean_tokens)
     clean_url = re.sub(r'http\S+', '', clean_s)
 
-    clean_punctuation = re.sub('(?<! )(?=[.,#!?()])|(?<=[.,#!?()])(?! )', ' ', clean_url)
+    clean_punctuation = re.sub('(?<! )(?=[-.,#!?()_])|(?<=[-.,#!?()_])(?! )', ' ', clean_url)
     clean_mess = [word.lower() for word in clean_punctuation.split() if word.lower() not in stopwords.words('english') and word not in  excluded_punct]
 
     return clean_mess
@@ -165,7 +165,6 @@ def predict_tweets_sent(tweets, model):
 def get_bigrams(tokens):
     return [(tokens[i],tokens[i+1]) for i in range(0,len(tokens)-1)]
 
-def get_common_bigrams(tokens):
-    bigrams_vocab = get_bigrams(tokens)
-    freq_dist = FreqDist(bigrams_vocab)
-    return freq_dist.most_common(5)
+def get_common_words(vocabulary):
+    freq_dist = FreqDist(vocabulary)
+    return freq_dist.most_common(10)

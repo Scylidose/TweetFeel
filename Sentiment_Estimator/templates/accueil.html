@@ -92,10 +92,19 @@
                 <hr class="little">
                 <img class="info" src="../static/img/word_cloud.png" alt="WordCloud">
                 <hr class="little">
-                <h4 class="text-center">Most Common Bi-Grams</h4>
-                {% for bigram in bigrams %}
-                <h5 class="text-center">{{ bigram[0] }}</h5>
-                {% endfor %}
+                <h4 class="text-center">Most Common Words</h4>
+                <table class="text-center center" border="2">
+                    <tr>
+                        <th class="text-center">Words</th>
+                        <th class="text-center">Nb of occurence</th>
+                    </tr>
+                    {% for word in common_words %}
+                    <tr>
+                        <td>{{ word[0] }}</td>
+                        <td>{{ word[1] }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
                 <hr class="little">
 
             </div>

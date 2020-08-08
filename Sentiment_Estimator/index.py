@@ -17,6 +17,7 @@ from wordcloud import WordCloud
 
 import requests
 import json
+import math
 
 app = Flask(__name__)
 
@@ -34,7 +35,7 @@ def accueil():
 
     tweets_example = None
 
-    common_bigrams = ""
+    common_words = ""
 
     predict_tweets_random = []
 
@@ -65,12 +66,17 @@ def accueil():
 
         predict_tweets_random = model.predict(tweets_random_df.iloc[:, 0])
 
-        plt.figure()
+
         happy_ratio = (percentage * len(tweets) / 100)
-        plt.bar([0, 1], [happy_ratio, len(tweets) - happy_ratio], color=("g", "r"))
+        ratio = [math.trunc(happy_ratio), math.trunc(len(tweets) - happy_ratio)]
+
+        plt.figure()   
+
+        plt.bar([0, 1], [ratio[0], ratio[1]], color=("g", "r"))
         plt.xticks([0, 1], ('Positive', 'Negative'))
         plt.title("Bar Plot of Positive and Negative Tweets ratio")
-        plt.savefig('static/img/bar_count.png', transparent=True)
+
+        plt.savefig('static/img/bar_count.png', transparent=True,)
 
         plt.figure()
         concat_pro_words = process_tweet.str.join(" ").to_list()
@@ -82,13 +88,13 @@ def accueil():
         plt.savefig('static/img/word_cloud.png', transparent=True)
 
 
-        tokens = [inner for outer in process_tweet.to_list() for inner in outer]
+        vocabulary = [inner for outer in process_tweet.to_list() for inner in outer]
 
-        common_bigrams = main.get_common_bigrams(tokens)
+        common_words = main.get_common_words(vocabulary)
     
     return render_template("accueil.html", accuracy=accuracy, percentage=percentage,
                                          search=search, examples=tweets_example, random_pred=predict_tweets_random,
-                                         bigrams=common_bigrams)
+                                         common_words=common_words)
 
 @app.after_request
 def add_header(response):

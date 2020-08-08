@@ -66,3 +66,7 @@ hr {
 .twitter-tweet {
     margin: 0px 0px !important;
 }
+
+td, th {
+    padding:5px !important;
+}

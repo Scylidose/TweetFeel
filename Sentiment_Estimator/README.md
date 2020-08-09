@@ -2,7 +2,7 @@
 
 ## Overview 
 
-Will get the global sentiment behind a word using Tweeter.
+Will get the global sentiment behind a word using Twitter.
 
 ![Sentiment_Estimator_png](https://github.com/Scylidose/ml-projects/blob/master/img/estimation-gif.gif)  
 

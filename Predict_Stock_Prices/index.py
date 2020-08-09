@@ -19,6 +19,7 @@ app.config['JSON_SORT_KEYS'] = False
 
 data_path = 'data/'
 
+'''
 def fetch_cryptocurrency(crypto_sel, currency_sel):
     crypto = pd.read_csv(data_path+'cryptocurrencies.csv')['Cryptocurrency'].to_list()
 
@@ -40,6 +41,7 @@ def fetch_cryptocurrency(crypto_sel, currency_sel):
             currency_json.append({'currency':currency[j], 'selected': False})
 
     return (crypto_json, currency_json)
+'''
 
 def save_plot(data, first_data, second_data, color, legend, title, save):
     _, ax = plt.subplots()
@@ -67,6 +69,9 @@ def accueil():
     today_date = today.strftime("%B %d, %Y")
     
     cryptocurrency = "BAT-CAD"
+
+    main.download_data(data_path, cryptocurrency)
+
     data = main.load_data(data_path, cryptocurrency)
 
     if(check_pred_today.iloc[0, 0] != today_date):
@@ -80,7 +85,9 @@ def accueil():
         save_plot(data_sel, 2, 3, ['-c', '-m'], ["Highest", "Lowest"],
         "Highest and Lowest for " + cryptocurrency + " price per day", "high_low")
 
-        save_plot(data_sel, 6, None,['-g'], None, "Volume value for " + cryptocurrency + " per day", "volume")
+        print(data_sel)
+
+        save_plot(data_sel, 5, None,['-g'], None, "Volume value for " + cryptocurrency + " per day", "volume")
 
         prediction_result = main.predict_stock(data_path, cryptocurrency)
 

@@ -17,9 +17,20 @@ from sklearn.metrics import r2_score
 from tensorflow import keras
 from keras import backend as K
 
+import yfinance as yf
 
 def transf_list(lst):
     return [[el] for el in lst]
+
+def download_data(data_path, cryptocurrency):
+    bat = yf.Ticker("BAT-CAD")
+
+    data = bat.history(period="max")
+
+    data.reset_index(level=0, inplace=True)
+
+    data.to_csv(data_path + cryptocurrency + '.csv', index=False)
+    
 
 def load_data(data_path, cryptocurrency):
     data = pd.read_csv(data_path + cryptocurrency + '.csv').dropna().reset_index(drop=True)
@@ -28,7 +39,7 @@ def load_data(data_path, cryptocurrency):
 
 def preprocess_data(data, min_max_scaler):
     X = transf_list(data.iloc[:, 1])
-    y = data.iloc[:, [4, 5]].values.tolist()
+    y = data.iloc[:, [4]].values.tolist()
 
     min_max_scaler = preprocessing.MinMaxScaler()
     x_scaled = min_max_scaler.fit_transform(X)
@@ -86,7 +97,7 @@ def get_model(X_train, y_train, X_test, y_test,
     model.add(Dropout(dropout_prob))
     model.add(LSTM(units = unit))
     model.add(Dropout(dropout_prob))
-    model.add(Dense(units = 2))
+    model.add(Dense(units = 1))
 
     model.compile(optimizer = opt, loss = 'mean_squared_error')
 

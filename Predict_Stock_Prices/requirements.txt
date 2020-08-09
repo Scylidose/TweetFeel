@@ -1,0 +1,10 @@
+numpy
+pandas
+datetime
+matplotlib
+flask
+sklearn
+os
+tensorflow
+keras
+yfinance

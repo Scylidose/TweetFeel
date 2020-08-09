@@ -5,8 +5,6 @@
 import numpy as np
 import pandas as pd
 
-from datetime import date
-
 from flask import (Flask, url_for, render_template,  make_response,
                    redirect, request, g, session, Response, jsonify)
 

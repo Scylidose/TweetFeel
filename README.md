@@ -15,6 +15,6 @@ Will predict the close value of the Basic Attention Token currency based on its 
 
 * [Access Repository](https://github.com/Scylidose/ml-projects/tree/master/Sentiment_Estimator)  
 
-![Sentiment Estimator gif](img/estimation-gif.png)
+![Sentiment Estimator gif](img/estimation-gif.gif)
 
 Fetch some Tweets based on a given input and will estimate the global sentiment behind it.

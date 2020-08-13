@@ -33,3 +33,46 @@ $ make run
 ```
 
 You can then access the application with the given address.  
+
+## Data Steps
+
+### Fetch Data
+
+- Comma-separated values (csv) file containing Sentiment140 dataset with 1.6 million tweets  
+https://www.kaggle.com/kazanova/sentiment140
+
+- Get atmost 100 tweets from a search query using **Tweepy** API in a JSON format.  
+
+### Pre-process Data
+
+- Removed irrelevant punctuation, mentionned user, link and english stopwords.  
+
+- Tokenized sentence.  
+
+- Lemmatized tokens.  
+
+- Deleted words longer than 15 characters.
+
+- TF-IDF Transformation.
+
+### Data Exploration
+
+- Most frequent words and Bi-grams.  
+
+- Count of estimated Positive and Negative tweets.  
+
+- Displayed the WordCloud.  
+
+### Model
+
+- Logistic Regression :  
+    - L2 Penalty  
+    - Tolerance value of 0.001  
+    - C value of 1  
+
+### Accuracy
+
+- Confusion Matrix  
+
+- Accuracy classification score (Jaccard Score)  
+

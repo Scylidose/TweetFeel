@@ -10,6 +10,8 @@
 
 Will predict the close value of the Basic Attention Token currency based on its open value.
 
+- Recurrent Neural Network, Long Short-Term Memory.  
+
 
 ### Estimate the Global Sentiment behind Tweets
 
@@ -18,3 +20,5 @@ Will predict the close value of the Basic Attention Token currency based on its 
 ![Sentiment Estimator gif](img/estimation-gif.gif)
 
 Fetch some Tweets based on a given input and will estimate the global sentiment behind it.
+
+- Logistic Regression.  

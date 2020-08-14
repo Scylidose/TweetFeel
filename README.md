@@ -22,3 +22,7 @@ Will predict the close value of the Basic Attention Token currency based on its 
 Fetch some Tweets based on a given input and will estimate the global sentiment behind it.
 
 - Logistic Regression.  
+
+### Classify SMS messages
+
+* [Access Repository](https://github.com/Scylidose/ml-projects/tree/master/SMS_Classifier) 

@@ -67,9 +67,8 @@ You can then access the application with the given address.
     - LSTM -> 150 Units  
     - Dropout -> Probability of 0.3  
     - Dense -> 1 Unit  
-    <br />
-    - Optimizer -> Adam  
-    - Loss -> Mean Squarred Error
+- Optimizer -> Adam  
+- Loss -> Mean Squarred Error
 
 ### Accuracy
 

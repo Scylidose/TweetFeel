@@ -28,3 +28,9 @@ Fetch some Tweets based on a given input and will estimate the global sentiment 
 * [Access Repository](https://github.com/Scylidose/ml-projects/tree/master/SMS_Classifier) 
 
 Classify SMS messages as either *ham* or *spam*.
+
+### Generate Pokemon Songs
+
+* [Access Repository](https://github.com/Scylidose/ml-projects/tree/master/Generate_Music) 
+
+Will generate either a Battle, Route or Building song based on the fourth generation (Platinum/Diamond/Perl) of the Pokemon games.

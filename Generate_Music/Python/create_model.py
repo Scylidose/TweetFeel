@@ -1,5 +1,5 @@
 from keras.models import Sequential
-from keras.layers import Dense, Dropout, LSTM, Activation
+from keras.layers import Dense, Dropout, LSTM, Activation, GRU, Bidirectional
 from keras.callbacks import ModelCheckpoint
 
 import os.path
@@ -7,23 +7,29 @@ import os.path
 def create_model(n_vocab, net_inp, model_type):
 
   model = Sequential()
-
-  model.add(LSTM(
+  if model_type == "LSTM":
+    model.add(LSTM(
             512,
             input_shape=(net_inp.shape[1], net_inp.shape[2]),
             return_sequences=True
         ))
-  model.add(Dropout(0.2))
-  model.add(LSTM(256, return_sequences=True))
-  model.add(Dropout(0.2))
-  model.add(LSTM(256))
-  model.add(Dropout(0.2))
-  model.add(Activation('relu'))
-  model.add(Dense(n_vocab))
-  model.add(Activation('softmax'))
+    model.add(Dropout(0.2))
+    model.add(LSTM(256, return_sequences=True))
+    model.add(Dropout(0.2))
+    model.add(LSTM(256))
+    model.add(Dropout(0.2))
+    model.add(Activation('relu'))
+    model.add(Dense(n_vocab))
+    model.add(Activation('softmax'))
 
-  model.compile(loss='categorical_crossentropy', optimizer='rmsprop')
+    model.compile(loss='categorical_crossentropy', optimizer='rmsprop')
 
+  elif model_type == "GRU":
+    model.add(Bidirectional(GRU(256, input_shape=(net_inp.shape[1], net_inp.shape[2]))))
+    model.add(Dense(n_vocab))
+    model.add(Activation('softmax'))
+    model.compile(loss='categorical_crossentropy', optimizer='adam')
+  
   model.summary()
   
   return model

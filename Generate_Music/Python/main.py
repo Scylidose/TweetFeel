@@ -1,16 +1,16 @@
 import glob
 from music21 import stream
 
-import process_notes
-import create_model
-import make_prediction
+import Python.process_notes as process_notes
+import Python.create_model as create_model
+import Python.make_prediction as make_prediction
 
 def generate_song(notes, song_type, model_type):
     midi_stream = stream.Stream(notes)
     music_name = model_type + " - Notes - " + song_type + " Music.mid"
     midi_stream.write('midi', fp=music_name)
 
-def main(song_type, model_type, nb_epochs, batch_size):
+def predict_generate(song_type, model_type, nb_epochs, batch_size):
 
     song_dir = "../data/"+song_type
     weights_dir = "../model_weights/"+ model_type.upper()
@@ -33,13 +33,11 @@ def main(song_type, model_type, nb_epochs, batch_size):
 
     generate_song(output_notes, song_type, model_type)
 
-
-if __name__ == "__main__":
-
+def main():
     nb_epochs = 200
     batch_size = 64
 
     song_type = ["Battle", "Route", "Buildings"]
-    model_type = ["LSTM"]
+    model_type = ["LSTM", "GRU"]
 
-    main(song_type[0], model_type[0], nb_epochs, batch_size)
+    predict_generate(song_type[0], model_type[0], nb_epochs, batch_size)

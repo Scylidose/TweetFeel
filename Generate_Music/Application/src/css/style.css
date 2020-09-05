@@ -1,0 +1,9 @@
+body {
+    height: 100vh;
+    background: linear-gradient(to bottom right, #c04848, #480048);
+}
+
+p {
+    color: white;
+    font-weight: bold;
+}

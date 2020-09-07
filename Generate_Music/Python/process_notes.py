@@ -27,9 +27,38 @@ def no_divide_notes(file):
     elif isinstance(notes_to_parse[element], chord.Chord):
       notes.append('.'.join(str(n) for n in notes_to_parse[element].normalOrder))
 
+  return notes
+
+def divide_notes(file, nb, seg):
+  notes = []
+
+  midi = converter.parse(file)
+  notes_to_parse = None
+  parts = instrument.partitionByInstrument(midi)
+
+  if parts: # file has instrument parts
+    notes_to_parse = parts.parts[0].recurse()
+  else: # file has notes in a flat structure
+    notes_to_parse = midi.flat.notes
+
+  threshold = int(len(notes_to_parse)/nb)
+
+  for element in range(0, len(notes_to_parse)):
+
+    if element >= threshold * (seg-1) and element < threshold * seg:
+      if isinstance(notes_to_parse[element], music21.note.Note):
+        notes.append(str(notes_to_parse[element].pitch))
+      elif isinstance(notes_to_parse[element], chord.Chord):
+        notes.append('.'.join(str(n) for n in notes_to_parse[element].normalOrder))
+
+  return notes
+
+
+def remove_freq(notes):
   freq = dict(Counter(notes))
   no=[count for _,count in freq.items()]
-  no_zscore = np.absolute(stats.zscore(no)) < 3
+
+  no_zscore = np.absolute(stats.zscore(no)) < 2.7
 
   for i in range(len(freq.keys())):
     freq[list(freq.keys())[i]] = [list(freq.values())[i], no_zscore[i]]

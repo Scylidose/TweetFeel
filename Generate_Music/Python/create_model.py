@@ -30,26 +30,27 @@ def create_model(n_vocab, net_inp, model_type):
     model.add(Activation('softmax'))
     model.compile(loss='categorical_crossentropy', optimizer='adam')
   
-  model.summary()
+  elif model_type == "FINAL":
+    model.add(Bidirectional(GRU(256, input_shape=(net_inp.shape[1], net_inp.shape[2]), return_sequences=True)))
+    model.add(Dropout(0.2))
+    model.add(Bidirectional(GRU(256, input_shape=(net_inp.shape[1], net_inp.shape[2]))))
+    model.add(Dense(n_vocab))
+    model.add(Activation('softmax'))
+    model.compile(loss='categorical_crossentropy', optimizer='adam')
   
   return model
 
-def model_fit(model, X_train, X_val, y_train, y_val, nb_epochs, batch_size, song_type, weights_dir):
-    model_name = "best_model_"+ song_type.lower() + ".h5"
+def model_fit(model, X_train, y_train, nb_epochs, batch_size, song_type, nb, model_type, weights_dir):
+    model_name = "best_model_"+ song_type.lower()
 
     weights_file_name = weights_dir + model_name
 
     if os.path.exists(weights_file_name):
-        model.load_weights(weights_file_name)
+      if model_type == "FINAL":
+        model.load_weights(weights_file_name + "_n"+ nb +".h5")
+      else:
+        model.load_weights(weights_file_name + ".h5")
     else:
-        checkpoint = ModelCheckpoint(model_name, 
-                                    monitor='loss',
-                                    mode='min', 
-                                    save_best_only=True,
-                                    save_weights_only=True,
-                                    verbose=0)
-
-        callbacks_list = [checkpoint]
-        model.fit(X_train, y_train,validation_data=(X_val,y_val), epochs=nb_epochs, batch_size=batch_size, callbacks=callbacks_list, verbose=1)
+        model.fit(X_train, y_train, epochs=nb_epochs, batch_size=batch_size, verbose=1)
 
     return model

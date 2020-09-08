@@ -1,9 +1,24 @@
 body {
     height: 100vh;
     background: linear-gradient(to bottom right, #c04848, #480048);
+    text-align: center;
 }
 
-p {
-    color: white;
+h4 {
+    color: black;
     font-weight: bold;
+}
+
+h3 {
+    color: white;
+    font-weight: bold; 
+}
+
+.left-panel {
+    margin-top:50px;
+    background-color: #fff;
+}
+
+.separator {
+    border-left: 2px solid black;
 }

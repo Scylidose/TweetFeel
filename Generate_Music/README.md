@@ -8,8 +8,6 @@ Display differents songs, generated using a GRU model based on various different
 
 -  Shows generated songs by theme (Battle, Route and Buildings).  
 
-- Display the pokemon songs, the generated song was based on.  
-
 
 ## How to use
   

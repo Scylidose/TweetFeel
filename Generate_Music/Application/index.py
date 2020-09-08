@@ -15,22 +15,29 @@ from flask_cors import CORS, cross_origin
 #import Python.main as main
 import time
 
-template_dir = "templates"
-app = Flask(__name__, template_folder=template_dir)
+app = Flask(__name__)
 
 app.config['JSON_SORT_KEYS'] = False
 CORS(app)
 
 @app.route('/')
 def home():
-    song_dir = "midi"
+    song_dir = "src/mp3"
 
     songs = []
 
-    for file in glob.glob(song_dir+"/*.midi"):
+    trained = []
+
+    for file in glob.glob(song_dir+"/*.mp3"):
         songs.append(file)
     
-    return {'songs': songs}
+    battle = []
+    for file in glob.glob("../data/Battle/*.midi"):
+        battle.append(file)
+
+    trained.append(battle)
+
+    return {'songs': songs, 'trained':trained}
 
 @app.after_request
 def add_header(response):

@@ -52,6 +52,6 @@ Will generate either a Battle, Route or Building song based on the fourth genera
 
 ![Discord Bot gif](img/discord-bot.gif)
 
-Will generate either a Battle, Route or Building song based on the fourth generation (Platinum/Diamond/Perl) of the Pokemon games.
+Display a bot on Discord that will listen to the user's input and repeat a sentence for a specific number of times and in the targeted channel.
 
 - Python, Heroku, SQL.

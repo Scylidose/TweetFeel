@@ -20,24 +20,23 @@ app = Flask(__name__)
 app.config['JSON_SORT_KEYS'] = False
 CORS(app)
 
+
 @app.route('/')
-def home():
-    song_dir = "src/mp3"
+def accueil():
+    song_dir = "./static/ost/battle/"
 
     songs = []
 
-    trained = []
+    train = []
 
-    for file in glob.glob(song_dir+"/*.mp3"):
-        songs.append(file)
-    
-    battle = []
-    for file in glob.glob("../data/Battle/*.midi"):
-        battle.append(file)
+    for file in glob.glob(song_dir+"*.midi"):
+        file_name = "/".join(file.split("/")[2:])
 
-    trained.append(battle)
+        train.append(file_name)
 
-    return {'songs': songs, 'trained':trained}
+    # return render_template("accueil.html", train=train, result=result, model=model, info=info)
+    return render_template("accueil.html")
+
 
 @app.after_request
 def add_header(response):

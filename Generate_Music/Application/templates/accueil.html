@@ -1,0 +1,125 @@
+{% extends "layout.html" %} {% block content %}
+<div class="container-ost">
+    <div style="text-align: center; font-size: 3rem; color: white; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;">Trained on : </div>
+    
+    <p>{{ train }}</p>
+    <p>{{ result }}</p>
+    <p>{{ model }}</p>
+    <p>{{ info }}</p>
+
+    <div id="train-grid">
+        <input type="radio" name="position" checked />
+        <input type="radio" name="position" />
+        <input type="radio" name="position" />
+        <input type="radio" name="position" />
+        <input type="radio" name="position" />
+        <input type="radio" name="position" />
+        <input type="radio" name="position" />
+
+        
+        <main id="carousel">
+            <div class="item">
+                <div class="ost-wrap">
+                    <img class="midi-poster" src="{{ url_for('static', filename='img/Battle_Elite_Four.png') }}">
+                    <midi-player class="midi-player" src="{{ url_for('static', filename='ost/battle/Battle_Elite_Four.midi') }}">
+                    </midi-player>
+                    
+                    <h3 class="midi-text">Elite Four - Sinnoh</h3>
+                </div>
+            </div>
+            <div class="item">
+                <div class="ost-wrap">
+                    <img class="midi-poster" src="{{ url_for('static', filename='img/Battle_Champion.png') }}">
+                    <midi-player class="midi-player" src="{{ url_for('static', filename='ost/battle/Battle_Champion.midi') }}">
+                    </midi-player>
+                    
+                    <h3 class="midi-text">Cynthia Battle - Sinnoh</h3>
+                </div>
+            </div>
+            <div class="item">
+                <div class="ost-wrap">
+                    <img class="midi-poster" src="{{ url_for('static', filename='img/Battle_Gym_Leader.png') }}">
+                    <midi-player class="midi-player" src="{{ url_for('static', filename='ost/battle/Battle_Gym_Leader.midi') }}">
+                    </midi-player>
+                    
+                    <h3 class="midi-text">Gym Leader - Sinnoh</h3>
+                </div>
+            </div>
+            <div class="item">
+                <div class="ost-wrap">
+                    <img class="midi-poster" src="{{ url_for('static', filename='img/Champion_Cynthia.png') }}">
+                    <midi-player class="midi-player" src="{{ url_for('static', filename='ost/battle/Champion_Cynthia.midi') }}">
+                    </midi-player>
+                    
+                    <h3 class="midi-text">Cynthia Theme - Sinnoh</h3>
+                </div>
+            </div>
+            <div class="item">
+                <div class="ost-wrap">
+                    <img class="midi-poster" src="{{ url_for('static', filename='img/Battle_Legendary_Pokemon.png') }}">
+                    <midi-player class="midi-player" src="{{ url_for('static', filename='ost/battle/Battle_Legendary_Pokemon.midi') }}">
+                    </midi-player>
+                    
+                    <h3 class="midi-text">Battle Legendary Pokemon</h3>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="ost-wrap">
+                    <img class="midi-poster" src="{{ url_for('static', filename='img/Battle_Team_Galactic_Commander.png') }}">
+                    <midi-player class="midi-player" src="{{ url_for('static', filename='ost/battle/Battle_Team_Galactic_Commander.midi') }}">
+                    </midi-player>
+                    
+                    <h3 class="midi-text">Battle Team Galactic</h3>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="ost-wrap">
+                    <img class="midi-poster" src="{{ url_for('static', filename='img/Decisive_Battle_Pokemon_League.png') }}">
+                    <midi-player class="midi-player" src="{{ url_for('static', filename='ost/battle/Decisive_Battle_Pokemon_League.midi') }}">
+                    </midi-player>
+                    
+                    <h3 class="midi-text">Decisive Battle</h3>
+                </div>
+            </div>
+        <main>
+    </div>  
+
+    <div class="result-wrap">
+        <div style="float: left; margin-left: 15rem;">
+            <div style="font-size: 2rem; color: white; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;">
+                <h3>Model Layers : </h3>
+                <ul>
+                    <li>Bidirectional Gated recurrent units (GRU) </li>
+                    <li>Dense (Dropout = 0.2) </li>
+                    <li>Bidirectional Gated recurrent units (GRU) </li>
+                    <li>Dense (Dropout = number of notes) </li>
+                    <li>Softmax Activation </li>
+                    <li>Loss : Categorical Crossentropy </li>
+                    <li>Optimizer : Adam </li>
+
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="result-ost" style="width: 100%; position:absolute; height: 250px; text-align: center;">
+            
+            <h2 style="text-align: center; font-size: 3rem; color: white; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;">Result : </h2>
+
+
+            <div class="item" style="display: inline-block; position: relative;">
+                <div class="ost-wrap">
+                    <img class="midi-poster" src="{{ url_for('static', filename='img/Battle_Generated_OST.png') }}">
+                    <midi-player class="midi-player" src="{{ url_for('static', filename='ost/battle/Battle_Generated_OST.midi') }}">
+                    </midi-player>
+                    
+                    <h3 class="midi-text">Generated Battle OST</h3>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

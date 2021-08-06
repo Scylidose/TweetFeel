@@ -12,7 +12,7 @@ Display a bot on Discord that will listen to the user's input and repeat a sente
 
 - User can choose in which channel the sentences has to display.  
 
-- Limited number of time to repeat in certain channel to avoid spam.
+- Limited number of times to repeat in certain channel to avoid spam.
 
 - Hosted on Heroku 24h/24.  
 
@@ -24,5 +24,5 @@ Display a bot on Discord that will listen to the user's input and repeat a sente
 To use Serena, the user has to enter on a discord channel:
 
 ```
-!serena "<YOUR MESSAGE>" #<CHANNEL (optional)> <NUMBER OF TIME TO REPEAT>
+!serena "<YOUR MESSAGE>" #<CHANNEL (optional)> <NUMBER OF TIMES TO REPEAT>
 ```

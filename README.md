@@ -33,4 +33,8 @@ Classify SMS messages as either *ham* or *spam*.
 
 * [Access Repository](https://github.com/Scylidose/ml-projects/tree/master/Generate_Music) 
 
+![Pokemon OST Generator gif](img/pokemon-ost-gen.gif)
+
 Will generate either a Battle, Route or Building song based on the fourth generation (Platinum/Diamond/Perl) of the Pokemon games.
+
+- Gated Recurrent Units, Long Short-Term Memory.

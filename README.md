@@ -55,3 +55,14 @@ Will generate either a Battle, Route or Building song based on the fourth genera
 Display a bot on Discord that will listen to the user's input and repeat a sentence for a specific number of times and in the targeted channel.
 
 - Python, Heroku, SQL.
+
+### FeelinBot (WIP)
+
+* [Access Repository](https://github.com/Scylidose/ml-projects) 
+
+
+Chatbot deployed on Facebook Messenger that can respond to a user input and do sentiment analysis with it.
+
+- Python.
+
+- Heroku, Firebase, Facebook, DialogFlow.

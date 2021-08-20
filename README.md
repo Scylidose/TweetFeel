@@ -58,11 +58,11 @@ Display a bot on Discord that will listen to the user's input and repeat a sente
 
 ### FeelinBot (WIP)
 
-* [Access Repository](https://github.com/Scylidose/ml-projects) 
+* [Access Repository](https://github.com/Scylidose/ml-projects/tree/master/FeelinBot) 
 
 
-Chatbot deployed on Facebook Messenger that can respond to a user input and do sentiment analysis with it.
+Display a bot on Facebook Messenger that will listen to the user's input and analyze the general sentiment behind certain sentences.
 
 - Python.
 
-- Heroku, Firebase, Facebook, DialogFlow.
+- Heroku, Firebase, Facebook Messenger, DialogFlow.

@@ -1,11 +1,15 @@
 #Python libraries that we need to import for our bot
+import os
+
+from dotenv import load_dotenv
+
 import random
 from flask import Flask, request
 from pymessenger.bot import Bot
 
 app = Flask(__name__)
-ACCESS_TOKEN = ''
-VERIFY_TOKEN = ''
+ACCESS_TOKEN = os.getenv('FACEBOOK_ACCESS_TOKEN')
+VERIFY_TOKEN = os.getenv('FACEBOOK_VERIFY_TOKEN')
 
 bot = Bot(ACCESS_TOKEN)
 

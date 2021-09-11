@@ -14,6 +14,10 @@ Display a bot on Discord that will listen to the user's input and repeat a sente
 
 - Limited number of times to repeat in certain channel to avoid spam.
 
+- Can play various audio, from youtube links or MP4 files.
+
+- Can store audio commands to directly play audio without the link.
+
 - Hosted on Heroku 24h/24.  
 
 - Certain variables are stored in Heroku, to allow easy modification.

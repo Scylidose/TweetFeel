@@ -52,7 +52,7 @@ Will generate either a Battle, Route or Building song based on the fourth genera
 
 ![Discord Bot gif](img/discord-bot.gif)
 
-Display a bot on Discord that will listen to the user's input and repeat a sentence for a specific number of times and in the targeted channel.
+Display a bot on Discord that will listen to the user's input and repeat a sentence for a specific number of times and in the targeted channel. Can also play audio files and links in a voice channel.
 
 - Python, Heroku, SQL.
 
@@ -65,4 +65,4 @@ Display a bot on Facebook Messenger that will listen to the user's input and ana
 
 - Python.
 
-- Heroku, Firebase, Facebook Messenger, DialogFlow.
+- Heroku, Facebook Messenger.

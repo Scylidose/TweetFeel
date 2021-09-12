@@ -69,8 +69,11 @@ async def on_message(ctx, *, arg):
             await ctx.voice_client.disconnect()
         
         elif(validators.url(url)):
-            voice_channel = bot.get_channel(VC_CHANNEL)
-            await voice_channel.connect()
+            voice = discord.utils.get(bot.voice_clients, guild=ctx.guild)
+
+            if voice == None:
+                voice_channel = bot.get_channel(VC_CHANNEL)
+                await voice_channel.connect()
 
             server = ctx.message.guild
             voice_channel = server.voice_client

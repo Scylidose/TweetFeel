@@ -28,7 +28,6 @@ VC_CHANNEL = int(os.getenv('VC_ID'))
 
 bot = commands.Bot(command_prefix='!')
 
-
 DATABASE_URL = os.environ['DATABASE_URL_SQL']
 engine = create_engine(DATABASE_URL, echo = False)
 
@@ -40,106 +39,112 @@ async def on_ready():
 @commands.cooldown(1, 5, commands.BucketType.user)
 async def on_message(ctx, *, arg):
 
-    url = ctx.message.content
-    url = url.strip('!serena ')
+    try:
+        url = ctx.message.content
+        url = url.strip('!serena ')
 
-    splitted_msg = arg.split(" ")
-    text = ""
+        splitted_msg = arg.split(" ")
+        text = ""
 
-    yt_links = json.loads(LINKS)
-
-    for key, value in yt_links.items():
-        if(splitted_msg[0] == key):
-            url = value
-
-    if(splitted_msg[0] == 'help'):
-        text = os.getenv('HELPER_MESSAGE')
-        text += "\nMes commandes audio :\n"
+        yt_links = json.loads(LINKS)
 
         for key, value in yt_links.items():
-            text += key + "\n"
+            if(splitted_msg[0] == key):
+                url = value
+
+        if(splitted_msg[0] == 'help'):
+            text = os.getenv('HELPER_MESSAGE')
+            text += "\nMes commandes audio :\n"
+
+            for key, value in yt_links.items():
+                text += key + "\n"
+            
+            await ctx.send(text)
+
+        elif(splitted_msg[0] == 'rules34'):
+            for i in range(0, 3):
+                await ctx.send("https://www.youtube.com/watch?v=dQw4w9WgXcQ")
+
+        elif(splitted_msg[0] == 'skip'):
+            await ctx.voice_client.disconnect()
         
+        elif(validators.url(url)):
+            voice_channel = bot.get_channel(VC_CHANNEL)
+            await voice_channel.connect()
 
-        await ctx.send(text)
+            server = ctx.message.guild
+            voice_channel = server.voice_client
 
-    elif(splitted_msg[0] == 'rules34'):
-        for i in range(0, 3):
-            await ctx.send("https://www.youtube.com/watch?v=dQw4w9WgXcQ")
-    
-    elif(validators.url(url)):
-        voice_channel = bot.get_channel(VC_CHANNEL)
-        await voice_channel.connect()
+            filename = await YTDLSource.from_url(url, loop=bot.loop)
+            voice_channel.play(discord.FFmpegPCMAudio(source=filename))
 
-        server = ctx.message.guild
-        voice_channel = server.voice_client
-
-        filename = await YTDLSource.from_url(url, loop=bot.loop)
-        voice_channel.play(discord.FFmpegPCMAudio(source=filename))
-
-        while voice_channel.is_playing():
-            time.sleep(1)
-        await voice_channel.disconnect()
-
-    else:
-        channel_id = ""
-        if(int(splitted_msg[-1])):
-            nb_times = int(splitted_msg[-1])
         else:
-            nb_times = 1
-
-        real_nb_times = nb_times
-        flood_channel_id = discord.utils.get(ctx.guild.channels, name=os.getenv('FLOOD_CHANNEL_NAME'))
-        if(flood_channel_id):
-            flood_channel_id = flood_channel_id.id
-        else:
-            flood_channel_id = ""
-
-        current_channel = str(ctx.message.channel)
-        
-
-        if splitted_msg[-2].find("#") != -1 and splitted_msg[-2][-1] != "\"":
-            channel_id = splitted_msg[-2]
-        
-
-        if channel_id != "":
-            channel_id = int(str(channel_id).replace('#', '').replace("<", "").replace(">", "").replace(" ", ""))
-
-            channel = bot.get_channel(channel_id)
-
-        if channel_id == "":
-            if nb_times > 3 and discord.utils.get(ctx.guild.channels, name=current_channel).id != flood_channel_id:
-                nb_times = 3
-        else:
-            if nb_times > 3 and flood_channel_id != channel_id:
-                nb_times = 3
-
-        if nb_times > 50:
-            nb_times = 50
-
-        quoted = re.compile('"[^"]*"')
-        for value in quoted.findall(arg):
-            text += value
-
-        text = text.replace('\"', '')
-
-        dataset = pd.DataFrame(
-            {
-            'action_mode': 'Ajout',
-            'caller': str(ctx.message.author),
-            'text': text,
-            'nb_times': real_nb_times,
-            'date': datetime.now().strftime("%d/%m/%Y %H:%M:%S")
-            }, index=[0])
-
-        dataset.to_sql('serena', con = engine, if_exists='append')
-
-        for i in range(0, nb_times):
-            if channel_id == "":
-                await ctx.send(text)
+            channel_id = ""
+            if(int(splitted_msg[-1])):
+                nb_times = int(splitted_msg[-1])
             else:
-                await channel.send(text)
+                nb_times = 1
 
-    
+            real_nb_times = nb_times
+            flood_channel_id = discord.utils.get(ctx.guild.channels, name=os.getenv('FLOOD_CHANNEL_NAME'))
+            if(flood_channel_id):
+                flood_channel_id = flood_channel_id.id
+            else:
+                flood_channel_id = ""
+
+            current_channel = str(ctx.message.channel)
+            
+
+            if splitted_msg[-2].find("#") != -1 and splitted_msg[-2][-1] != "\"":
+                channel_id = splitted_msg[-2]
+            
+
+            if channel_id != "":
+                channel_id = int(str(channel_id).replace('#', '').replace("<", "").replace(">", "").replace(" ", ""))
+
+                channel = bot.get_channel(channel_id)
+
+            if channel_id == "":
+                if nb_times > 3 and discord.utils.get(ctx.guild.channels, name=current_channel).id != flood_channel_id:
+                    nb_times = 3
+            else:
+                if nb_times > 3 and flood_channel_id != channel_id:
+                    nb_times = 3
+
+            if nb_times > 50:
+                nb_times = 50
+
+            quoted = re.compile('"[^"]*"')
+            for value in quoted.findall(arg):
+                text += value
+
+            text = text.replace('\"', '')
+
+            dataset = pd.DataFrame(
+                {
+                'action_mode': 'Ajout',
+                'caller': str(ctx.message.author),
+                'text': text,
+                'nb_times': real_nb_times,
+                'date': datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+                }, index=[0])
+
+            dataset.to_sql('serena', con = engine, if_exists='append')
+
+            for i in range(0, nb_times):
+                if channel_id == "":
+                    await ctx.send(text)
+                else:
+                    await channel.send(text)
+
+    except Exception as err:
+        print("Uh oh, please send me this message: '" + str(err) + "'")
+
+
+@bot.command()
+async def on_new_message(ctx, *, arg):
+    return 0
+
     
 
 youtube_dl.utils.bug_reports_message = lambda: ''

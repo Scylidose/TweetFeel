@@ -12,7 +12,7 @@ Display a bot on Facebook Messenger that will listen to the user's input and ana
 
 - Analyze the general sentiment behind every user's input. 
 
-- Can generate a report that summarizes the user's feelings.
+- Generate a report that summarizes the user's feelings.
 
 - Hosted on Heroku 24h/24.  
 

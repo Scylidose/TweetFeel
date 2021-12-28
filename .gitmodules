@@ -1,0 +1,3 @@
+[submodule "AISNA"]
+	path = AISNA
+	url = https://github.com/Scylidose/AISNA

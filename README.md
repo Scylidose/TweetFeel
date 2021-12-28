@@ -56,6 +56,18 @@ Display a bot on Discord that will listen to the user's input and repeat a sente
 
 - Python, Heroku, SQL.
 
+### AISNA
+
+* [Access Repository](https://github.com/Scylidose/AISNA) 
+
+**AISNA** is a project inspired from the Person of Interest TV series and more specifically from this episode excerpt (S4xE05):  
+
+[![Admin is not Admin](http://img.youtube.com/vi/nhWe2nf24ag/0.jpg)](http://www.youtube.com/watch?v=nhWe2nf24ag "Person of Interest - Admin is not Admin")
+
+AISNA is a deep learning algorithm which use **live faces recognition** to determine if the person on camera is either an admin or an unknown person. It also uses **voice recognition** to show more features on the broadcast if certain words are used.
+
+- Python.
+
 ### FeelinBot (WIP)
 
 * [Access Repository](https://github.com/Scylidose/ml-projects/tree/master/FeelinBot) 

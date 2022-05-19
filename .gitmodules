@@ -1,3 +1,6 @@
 [submodule "AISNA"]
 	path = AISNA
 	url = https://github.com/Scylidose/AISNA
+[submodule "VoiceCoding"]
+	path = VoiceCoding
+	url = https://github.com/Scylidose/VoiceCoding

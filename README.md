@@ -56,7 +56,7 @@ Display a bot on Discord that will listen to the user's input and repeat a sente
 
 - Python, Heroku, SQL.
 
-### AISNA
+### AISNA (WIP)
 
 * [Access Repository](https://github.com/Scylidose/AISNA) 
 
@@ -65,6 +65,16 @@ Display a bot on Discord that will listen to the user's input and repeat a sente
 [![Admin is not Admin](http://img.youtube.com/vi/nhWe2nf24ag/0.jpg)](http://www.youtube.com/watch?v=nhWe2nf24ag "Person of Interest - Admin is not Admin")
 
 AISNA is a deep learning algorithm which use **live faces recognition** to determine if the person on camera is either an admin or an unknown person. It also uses **voice recognition** to show more features on the broadcast if certain words are used.
+
+- Python.
+
+### VoiceCoding (WIP)
+
+* [Access Repository](https://github.com/Scylidose/VoiceCoding) 
+
+Will permit an user to code little instructions in Python using his voice. The instructions can afterward be executed and the result (or error) will be transcribed by a text-to-speech algorithm. 
+
+The goal of this project is to allow the user to code remotely from his computer for a short or longer period of time.
 
 - Python.
 

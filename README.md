@@ -26,14 +26,6 @@ Fetch some Tweets based on a given input and will estimate the global sentiment 
 
 - Flask, Jinja, CSS, JavaScript.
 
-### Classify SMS messages
-
-* [Access Repository](https://github.com/Scylidose/ml-projects/tree/master/SMS_Classifier) 
-
-Classify SMS messages as either *ham* or *spam*.
-
-- Python
-
 ### Generate Pokemon Songs
 
 * [Access Repository](https://github.com/Scylidose/ml-projects/tree/master/Generate_Music) 

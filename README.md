@@ -48,7 +48,7 @@ Display a bot on Discord that will listen to the user's input and repeat a sente
 
 - Python, Heroku, SQL.
 
-### AISNA (WIP)
+### AISNA
 
 * [Access Repository](https://github.com/Scylidose/AISNA) 
 

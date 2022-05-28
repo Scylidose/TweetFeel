@@ -58,7 +58,7 @@ Display a bot on Discord that will listen to the user's input and repeat a sente
 
 AISNA is a deep learning algorithm which use **live faces recognition** to determine if the person on camera is either an admin or an unknown person. It also uses **voice recognition** to show more features on the broadcast if certain words are used.
 
-https://user-images.githubusercontent.com/28122432/169847349-74c1bef1-12e8-45a7-a75b-9c74f7e0967d.mp4
+https://user-images.githubusercontent.com/28122432/170842748-47354517-9159-4464-86b9-64cea4c2f599.mp4
 
 - Python.
 

@@ -4,3 +4,6 @@
 [submodule "VoiceCoding"]
 	path = VoiceCoding
 	url = https://github.com/Scylidose/VoiceCoding
+[submodule "Botlan"]
+	path = Botlan
+	url = https://github.com/Scylidose/Botlan

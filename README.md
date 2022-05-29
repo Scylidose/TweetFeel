@@ -72,6 +72,15 @@ The goal of this project is to allow the user to code remotely from his computer
 
 - Python.
 
+### Botlan (WIP)
+
+* [Access Repository](https://github.com/Scylidose/Botlan) 
+
+
+Botlan is an algorithm that will ingest television series transcripts and output a totally new script.
+
+- Python.
+
 ### FeelinBot (WIP)
 
 * [Access Repository](https://github.com/Scylidose/ml-projects/tree/master/FeelinBot) 

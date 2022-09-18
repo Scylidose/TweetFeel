@@ -1,3 +1,0 @@
-flask>=1.0.0
-pymessenger==0.0.7.0
-gunicorn==19.6.0

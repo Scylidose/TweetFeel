@@ -80,14 +80,3 @@ The goal of this project is to allow the user to code remotely from his computer
 Botlan is an algorithm that will ingest television series transcripts and output a totally new script.
 
 - Python.
-
-### FeelinBot (WIP)
-
-* [Access Repository](https://github.com/Scylidose/ml-projects/tree/master/FeelinBot) 
-
-
-Display a bot on Facebook Messenger that will listen to the user's input and analyze the general sentiment behind certain sentences.
-
-- Python.
-
-- Heroku, Facebook Messenger.

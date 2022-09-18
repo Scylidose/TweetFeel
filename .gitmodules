@@ -7,3 +7,6 @@
 [submodule "Botlan"]
 	path = Botlan
 	url = https://github.com/Scylidose/Botlan
+[submodule "CancerDetection"]
+	path = CancerDetection
+	url = https://github.com/Scylidose/CancerDetection

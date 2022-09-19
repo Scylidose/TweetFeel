@@ -30,7 +30,7 @@ Fetch some Tweets based on a given input and will estimate the global sentiment 
 
 * [Access Repository](https://github.com/Scylidose/ml-projects/tree/master/Generate_Music) 
 
-![Pokemon OST Generator gif](img/pokemon-ost-gen.gif)
+https://user-images.githubusercontent.com/28122432/190934054-f9175785-64b3-4c4d-80dc-c975371ea6ff.mp4
 
 Will generate either a Battle, Route or Building song based on the fourth generation (Platinum/Diamond/Perl) of the Pokemon games.
 

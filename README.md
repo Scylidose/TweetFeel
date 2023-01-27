@@ -66,6 +66,8 @@ https://user-images.githubusercontent.com/28122432/170842748-47354517-9159-4464-
 
 * [Access Repository](https://github.com/Scylidose/CancerDetection) 
 
+Will help to determine if clinical data on unhealthy patients are related to cancer.
+
 ### VoiceCoding (WIP)
 
 * [Access Repository](https://github.com/Scylidose/VoiceCoding) 

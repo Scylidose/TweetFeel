@@ -63,15 +63,12 @@ https://user-images.githubusercontent.com/28122432/170842748-47354517-9159-4464-
 
 - Python.
 
-### Cancer Detection (WIP)
-
-* [Access Repository](https://github.com/Scylidose/CancerDetection) 
+<h3 align="center"><a href="https://github.com/Scylidose/CancerDetection">Cancer Detection (WIP)</a></h3>
 
 Will help to determine if clinical data on unhealthy patients are related to cancer.
 
-### VoiceCoding (WIP)
 
-* [Access Repository](https://github.com/Scylidose/VoiceCoding) 
+<h3 align="center"><a href="https://github.com/Scylidose/VoiceCoding">VoiceCoding (WIP)</a></h3>
 
 Will permit an user to code little instructions in Python using his voice. The instructions can afterward be executed and the result (or error) will be transcribed by a text-to-speech algorithm. 
 
@@ -79,10 +76,7 @@ The goal of this project is to allow the user to code remotely from his computer
 
 - Python.
 
-### Botlan (WIP)
-
-* [Access Repository](https://github.com/Scylidose/Botlan) 
-
+<h3 align="center"><a href="https://github.com/Scylidose/Botlan">Botlan (WIP)</a></h3>
 
 Botlan is an algorithm that will ingest television series transcripts and output a totally new script.
 

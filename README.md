@@ -2,7 +2,7 @@
 
 ## Projects
 
-<h3 align="center"><a href="https://github.com/Scylidose/ml-projects/tree/master/Predict_Stock_Prices">Predict BAT CryptoCurrency Close value</a></h3>
+<h3 align="center"><a href="https://github.com/Scylidose/Predict_Stock_Prices">Predict BAT CryptoCurrency Close value</a></h3>
 
 <p align="center">
   <img src="img/crypto_bat-img.png" alt="CryptoCurrency png" width="650" />
@@ -16,7 +16,7 @@ Will predict the close value of the Basic Attention Token currency based on its 
 
 ********
 
-<h3 align="center"><a href="https://github.com/Scylidose/ml-projects/tree/master/Sentiment_Estimator">Estimate the Global Sentiment behind Tweets</a></h3>
+<h3 align="center"><a href="https://github.com/Scylidose/Sentiment_Estimator">Estimate the Global Sentiment behind Tweets</a></h3>
 
 <p align="center">
   <img src="img/estimation-gif.gif" alt="Sentiment_Estimator_gif" width="650" />
@@ -30,7 +30,7 @@ Fetch some Tweets based on a given input and will estimate the global sentiment 
 
 ********
 
-<h3 align="center"><a href="https://github.com/Scylidose/ml-projects/tree/master/Generate_Music">Generate Pokemon Songs</a></h3>
+<h3 align="center"><a href="https://github.com/Scylidose/Generate_Music">Generate Pokemon Songs</a></h3>
 
 https://user-images.githubusercontent.com/28122432/190934054-f9175785-64b3-4c4d-80dc-c975371ea6ff.mp4
 

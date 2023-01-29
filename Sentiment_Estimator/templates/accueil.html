@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Predict Stock Price</title>
+
+    <!-- Feuille de style de l'application -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <!-- Bootstrap -->
+    <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+
+    <!-- JQuery -->
+    <script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+    <link rel="icon" href="{{ url_for('static', filename='img/twitter_monocle.png') }}">
+
+</head>
+
+<body>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8 text-center">
+                <div class="topcorner">
+                    <h1 class="center">Twitter Search <br>Sentiment Estimator</h1>
+                </div>
+                <br>
+                <form method="post">
+                    <div>
+                        <label for="search">Type Search Word</label><br>
+                        {% if percentage != None %}
+                        <input id="search" type="text" name="search" placeholder={{ search }}>
+                        {% else %}
+                        <input id="search" type="text" name="search"
+                            placeholder="#Trump, PewDiePie, OnePiece, Netflix, ...">
+                        {% endif %}
+                    </div>
+                    <div>
+                        <input type="submit" value="Search">
+                    </div>
+                </form>
+
+                {% if percentage != None %}
+                <h2>Sentiment score</h2>
+                <h3><span> {{ percentage }} % </span></h3>
+                {% if percentage <= 50 %}
+                <img src="../static/img/sad_emoji.png" alt="Big Sad">
+                {% else %}
+                <img src="../static/img/happy_emoji.png" alt="Pharrell Williams">
+
+                {% endif %}
+                {% endif %}
+
+                <h3>Algorithm Accuracy Score</h3>
+                <h4><span style="padding:3px 5px; border: 1px solid black"> {{ accuracy }} % </span></h4>
+
+                {% if percentage != None %}
+                <br>
+                <div style='width:100%'>
+                    <div style='width:50%;margin:0px auto'>
+                        {% for i in range(examples | length) %}
+                        <div class="tweeter_block">
+                            {{ examples[i] | safe }}
+                            {% if random_pred [i] == 4 %}
+                            <img width="50" height="50" src="../static/img/sad_emoji.png" alt="Big Sad">
+                            {% else %}
+                            <img width="50" height="50" src="../static/img/happy_emoji.png" alt="Pharrell Williams">
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                {% endif %}
+            </div>
+            {% if percentage == None %}
+            <div class="col-md-4" style="padding-right:0px !important">
+
+            </div>
+            {% else %}
+            <div class="col-md-4" style="padding-right:0px !important">
+                <h2>Search Stats</h2>
+                <hr>
+                <img class="info" src="../static/img/bar_count.png" alt="Bar Plot">
+                <hr class="little">
+                <img class="info" src="../static/img/word_cloud.png" alt="WordCloud">
+                <hr class="little">
+                <h4 class="text-center">Most Common Words</h4>
+                <table class="text-center center" border="2">
+                    <tr>
+                        <th class="text-center">Words</th>
+                        <th class="text-center">Nb of occurence</th>
+                    </tr>
+                    {% for word in common_words %}
+                    <tr>
+                        <td>{{ word[0] }}</td>
+                        <td>{{ word[1] }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+                <hr class="little">
+
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+
+</html>

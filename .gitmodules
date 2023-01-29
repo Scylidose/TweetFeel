@@ -19,3 +19,6 @@
 [submodule "Discord-Bot"]
 	path = Discord-Bot
 	url = https://github.com/Scylidose/Discord-Bot/
+[submodule "Predict_Stock_Prices"]
+	path = Predict_Stock_Prices
+	url = https://github.com/Scylidose/Predict_Stock_Prices

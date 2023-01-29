@@ -14,6 +14,7 @@ Will predict the close value of the Basic Attention Token currency based on its 
 
 - Flask, Jinja, CSS, JavaScript.
 
+********
 
 <h3 align="center"><a href="https://github.com/Scylidose/ml-projects/tree/master/Sentiment_Estimator">Estimate the Global Sentiment behind Tweets</a></h3>
 
@@ -27,6 +28,7 @@ Fetch some Tweets based on a given input and will estimate the global sentiment 
 
 - Flask, Jinja, CSS, JavaScript.
 
+********
 
 <h3 align="center"><a href="https://github.com/Scylidose/ml-projects/tree/master/Generate_Music">Generate Pokemon Songs</a></h3>
 
@@ -39,6 +41,8 @@ Will generate either a Battle, Route or Building song based on the fourth genera
 
 - Flask, Jinja, CSS, JavaScript.
 
+********
+
 <h3 align="center"><a href="https://github.com/Scylidose/Discord-Bot">Discord Bot</a></h3>
 
 <p align="center">
@@ -49,6 +53,8 @@ Will generate either a Battle, Route or Building song based on the fourth genera
 Display a bot on Discord that will listen to the user's input and repeat a sentence for a specific number of times and in the targeted channel. Can also play audio files and links in a voice channel.
 
 - Python, Heroku, SQL.
+
+********
 
 <h3 align="center"><a href="https://github.com/Scylidose/AISNA">AISNA</a></h3>
 
@@ -63,10 +69,13 @@ https://user-images.githubusercontent.com/28122432/170842748-47354517-9159-4464-
 
 - Python.
 
+********
+
 <h3 align="center"><a href="https://github.com/Scylidose/CancerDetection">Cancer Detection (WIP)</a></h3>
 
 Will help to determine if clinical data on unhealthy patients are related to cancer.
 
+********
 
 <h3 align="center"><a href="https://github.com/Scylidose/VoiceCoding">VoiceCoding (WIP)</a></h3>
 
@@ -75,6 +84,8 @@ Will permit an user to code little instructions in Python using his voice. The i
 The goal of this project is to allow the user to code remotely from his computer for a short or longer period of time.
 
 - Python.
+
+********
 
 <h3 align="center"><a href="https://github.com/Scylidose/Botlan">Botlan (WIP)</a></h3>
 

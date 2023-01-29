@@ -4,7 +4,7 @@
 
 Will get the global sentiment behind a word using Twitter.
 
-![Sentiment_Estimator_png](https://github.com/Scylidose/Sentiment_Estimator/img/estimation-gif.gif)  
+![Sentiment_Estimator_png](https://github.com/Scylidose/Sentiment_Estimator/blob/master/img/estimation-gif.gif)  
 
 ## Features
 

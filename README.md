@@ -39,7 +39,7 @@ Will generate either a Battle, Route or Building song based on the fourth genera
 
 - Flask, Jinja, CSS, JavaScript.
 
-<h3 align="center"><a href="https://github.com/Scylidose/ml-projects/tree/master/Discord_Bot">Discord Bot</a></h3>
+<h3 align="center"><a href="https://github.com/Scylidose/Discord-Bot">Discord Bot</a></h3>
 
 <p align="center">
   <img src="img/discord-bot.gif" alt="Discord Bot gif" width="650" />

@@ -13,3 +13,6 @@
 [submodule "CancerDetection"]
 	path = CancerDetection
 	url = https://github.com/Scylidose/CancerDetection
+[submodule "Discord-Bot"]
+	path = Discord-Bot
+	url = https://github.com/Scylidose/Discord-Bot/

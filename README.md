@@ -1,94 +1,78 @@
-# My Machine Learning Projects.
+# Twitter Search Sentiment Estimator
 
-## Projects
+## Overview 
 
-<h3 align="center"><a href="https://github.com/Scylidose/Predict_Stock_Prices">Predict BAT CryptoCurrency Close value</a></h3>
+Will get the global sentiment behind a word using Twitter.
 
-<p align="center">
-  <img src="img/crypto_bat-img.png" alt="CryptoCurrency png" width="650" />
-</p>
+![Sentiment_Estimator_png](https://github.com/Scylidose/Sentiment_Estimator/img/estimation-gif.gif)  
 
-Will predict the close value of the Basic Attention Token currency based on its open value.
+## Features
 
-- Recurrent Neural Network, Long Short-Term Memory.  
+- Display percentage of happiness of a given word  
 
-- Flask, Jinja, CSS, JavaScript.
+- Show sentiment count, word cloud and most used words.  
 
-********
-
-<h3 align="center"><a href="https://github.com/Scylidose/Sentiment_Estimator">Estimate the Global Sentiment behind Tweets</a></h3>
-
-<p align="center">
-  <img src="img/estimation-gif.gif" alt="Sentiment_Estimator_gif" width="650" />
-</p>
-
-Fetch some Tweets based on a given input and will estimate the global sentiment behind it.
-
-- Logistic Regression.  
-
-- Flask, Jinja, CSS, JavaScript.
-
-********
-
-<h3 align="center"><a href="https://github.com/Scylidose/Generate_Music">Generate Pokemon Songs</a></h3>
-
-https://user-images.githubusercontent.com/28122432/190934054-f9175785-64b3-4c4d-80dc-c975371ea6ff.mp4
+- Retrieve and display random tweets with its estimated sentiment.  
 
 
-Will generate either a Battle, Route or Building song based on the fourth generation (Platinum/Diamond/Perl) of the Pokemon games.
+## How to use
 
-- Gated Recurrent Units, Long Short-Term Memory.
+To clone and run this application, you'll need Git and Flask installed on your computer. From your command line:
 
-- Flask, Jinja, CSS, JavaScript.
+```bash
+# Retrieve git folder
+$ git clone https://github.com/Scylidose/Sentiment_Estimator.git
 
-********
+$ cd Sentiment_Estimator/
 
-<h3 align="center"><a href="https://github.com/Scylidose/Discord-Bot">Discord Bot</a></h3>
+# Install dependencies 
+$ pip3 install -r requirements.txt
 
-<p align="center">
-  <img src="img/discord-bot.gif" alt="Discord Bot gif" width="650" />
-</p>
+# Run application
+$ make run
+```
 
+You can then access the application with the given address.  
 
-Display a bot on Discord that will listen to the user's input and repeat a sentence for a specific number of times and in the targeted channel. Can also play audio files and links in a voice channel.
+## Data Steps
 
-- Python, Heroku, SQL.
+### Fetch Data
 
-********
+- Comma-separated values (csv) file containing Sentiment140 dataset with 1.6 million tweets  
+https://www.kaggle.com/kazanova/sentiment140
 
-<h3 align="center"><a href="https://github.com/Scylidose/AISNA">AISNA</a></h3>
+- Get atmost 100 tweets from a search query using **Tweepy** API in a JSON format.  
 
-  AISNA is a project inspired from the Person of Interest TV series and more specifically from this episode excerpt (S4xE05):  
+### Pre-process Data
 
-  [![Admin is not Admin](http://img.youtube.com/vi/nhWe2nf24ag/0.jpg)](http://www.youtube.com/watch?v=nhWe2nf24ag "Person of Interest - Admin is not Admin")
+- Removed irrelevant punctuation, mentionned user, link and english stopwords.  
 
+- Tokenized sentence.  
 
-AISNA is a deep learning algorithm which use **live faces recognition** to determine if the person on camera is either an admin or an unknown person. It also uses **voice recognition** to show more features on the broadcast if certain words are used.
+- Lemmatized tokens.  
 
-https://user-images.githubusercontent.com/28122432/170842748-47354517-9159-4464-86b9-64cea4c2f599.mp4
+- Deleted words longer than 15 characters.
 
-- Python.
+- TF-IDF Transformation.
 
-********
+### Data Exploration
 
-<h3 align="center"><a href="https://github.com/Scylidose/CancerDetection">Cancer Detection (WIP)</a></h3>
+- Most frequent words and Bi-grams.  
 
-Will help to determine if clinical data on unhealthy patients are related to cancer.
+- Count of estimated Positive and Negative tweets.  
 
-********
+- Displayed the WordCloud.  
 
-<h3 align="center"><a href="https://github.com/Scylidose/VoiceCoding">VoiceCoding (WIP)</a></h3>
+### Model
 
-Will permit an user to code little instructions in Python using his voice. The instructions can afterward be executed and the result (or error) will be transcribed by a text-to-speech algorithm. 
+- Logistic Regression :  
+    - L2 Penalty  
+    - Tolerance value of 0.001  
+    - C value of 1  
 
-The goal of this project is to allow the user to code remotely from his computer for a short or longer period of time.
+### Accuracy
 
-- Python.
+- Confusion Matrix  
 
-********
+- Accuracy classification score (Jaccard Score)  
 
-<h3 align="center"><a href="https://github.com/Scylidose/Botlan">Botlan (WIP)</a></h3>
-
-Botlan is an algorithm that will ingest television series transcripts and output a totally new script.
-
-- Python.

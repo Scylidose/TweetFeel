@@ -1,6 +1,9 @@
 [submodule "MECC"]
 	path = MECC
 	url = https://github.com/Scylidose/MECC
+[submodule "Generate_Music"]
+	path = Generate_Music
+	url = https://github.com/Scylidose/Generate_Music
 [submodule "AISNA"]
 	path = AISNA
 	url = https://github.com/Scylidose/AISNA

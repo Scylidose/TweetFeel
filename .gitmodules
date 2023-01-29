@@ -1,3 +1,15 @@
 [submodule "MECC"]
 	path = MECC
 	url = https://github.com/Scylidose/MECC
+[submodule "AISNA"]
+	path = AISNA
+	url = https://github.com/Scylidose/AISNA
+[submodule "VoiceCoding"]
+	path = VoiceCoding
+	url = https://github.com/Scylidose/VoiceCoding
+[submodule "Botlan"]
+	path = Botlan
+	url = https://github.com/Scylidose/Botlan
+[submodule "CancerDetection"]
+	path = CancerDetection
+	url = https://github.com/Scylidose/CancerDetection

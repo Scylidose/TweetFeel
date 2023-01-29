@@ -4,7 +4,7 @@
 
 Display differents songs, generated using a GRU model based on various different Pokemon songs.
 
-![Pokemon OST Generator gif](https://github.com/Scylidose/ml-projects/blob/master/img/pokemon-ost-gen.gif)
+https://user-images.githubusercontent.com/28122432/190934054-f9175785-64b3-4c4d-80dc-c975371ea6ff.mp4
 
 ## Features
 

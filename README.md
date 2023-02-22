@@ -1,4 +1,4 @@
-# Twitter Search Sentiment Estimator
+# TweetFeel
 
 ## Overview 
 
@@ -21,9 +21,9 @@ To clone and run this application, you'll need Git and Flask installed on your c
 
 ```bash
 # Retrieve git folder
-$ git clone https://github.com/Scylidose/Sentiment_Estimator.git
+$ git clone https://github.com/Scylidose/TweetFeel.git
 
-$ cd Sentiment_Estimator/
+$ cd TweetFeel/
 
 # Install dependencies 
 $ pip3 install -r requirements.txt
